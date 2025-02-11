@@ -1,0 +1,67 @@
+% \documentclass[
+% aspectratio=169,
+% 14pt,
+% professionalfonts
+% ]{article}
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Bayesian inference in particle physics}
+
+\author{\underline{Lorenz G\"artner}$^{1}$, Toni Sculac, Judith Katzy }
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\section{Bayesian Higgs}
+We got our hands on some fresh LHC data. It seems to be invariant mass measurements of the channel ... in the region $m \in [100, 150]~\mathrm{GeV}$.
+
+Excitedly, you tell all your friends. One of them tells you that you should analyse the data to obtain a measurement of the signal strength $\mu$. She also tells you, that for this channel the background is expected to have an exponential mass distribution of
+$$p(m|m_b, \lambda_b) =\frac{1}{\lambda_b} \exp\left(\frac{m-m_b}{\lambda_b}\right),$$
+where $m_b=100~\mathrm{GeV}$ and  $\lambda_b=20~\mathrm{GeV}$. The signal has an expected mass distribution given by
+$$p(m|m_b, \lambda_b) = \mathcal{N}(m_s, \sigma_s),$$
+where $m_s=125~\mathrm{GeV}$ and $\sigma_s=2~\mathrm{GeV}$. You expect $10000$ background events and $1000$ signal events
+
+\textit{Hint: Always work with twice negative logarithmic probabilities throughout the exercise.}
+\begin{enumerate}
+    \item Generate MC events for signal and background and load the data. %provide this
+
+    \item Construct the likelihood function
+    $$p(n|\mu, \mu_{bkg}) = \prod_{\mathrm{bins}~b} \mathrm{Poisson}(n_b|\nu_b(\mu, \mu_{bkg}))$$
+    where $n_b$ are your measured data yields per bin $b$. The expected yields per bin are
+    $$\nu_b(\mu, \mu_{bkg}) = \mu n_{sig,b} + \mu_{bkg} n_{bkg, b},$$
+    where $n_{sig,b}$ and $n_{bkg,b}$ are the expected signal and background yields per bin, respectively. Our model parameters are the normalization factors $\mu$ and $\mu_{bkg}$. The goal of this analysis will be to infer $\mu$.
+
+    \item Think about possible prior choices here. We are relatively confident in the background modeling, but are not so confident in the signal normalization. Think about possible prior choices for $\mu$ and $\mu_{bkg}$.
+    % $$p(\mu_{bkg}) = \mathcal{N}(\mu_{bkg}|1, 0.5).$$
+
+    \item Combine (twice negative log) likelihood and prior into a posterior.
+
+    \item What is the posterior mode? What is the impact of your priors here?
+
+    % \item \textit{Optional:} Perform a fit to your simulated data and obtain first estimates for $\mu$, $\mu_{bkg}$ and their uncertainties. You can fit both the unconstrained likelihood and the constrained likelihood and investigate differences.
+
+    \item {Advanced}: Code up your own implementation of the Metropolis-Hastings algorithm.
+
+    \textit{Hint}: Implement it such that it works with twice negative logarithmic probabilities, for numerical stability.
+
+    \textit{Alternative}: Copy my implementation from here. %TODO
+
+    \item Generate samples from the posterior.
+
+    \item Use the samples to obtain estimates for the 1-and 2-dimensional marginal posteriors of $\mu$ and $\mu_{bkg}$.
+
+    \item What is the 95\% upper credible interval on $\mu$?
+
+    \item What are the 68\% and 95\% highest density intervals of $\mu$ and $\mu_{bkg}$?
+
+\end{enumerate}
+
+\end{document}
+
+expon.pdf(y) / scale`` with
+``y = (x - loc) / scale``
