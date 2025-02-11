@@ -1,0 +1,247 @@
+\newif\ifbeamer@themeLMU@patchframe
+\DeclareOptionBeamer{patchframe}[false]{\csname beamer@themeLMU@patchframe#1\endcsname}
+\ExecuteOptionsBeamer{patchframe=false}
+\ProcessOptionsBeamer
+\mode<presentation>
+
+% \RequirePackage{xparse}
+% \RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\RequirePackage{bm}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{tgadventor}
+\usetikzlibrary{calc}
+
+\RequirePackage{enumitem}
+\setlist[itemize]{label=\textbullet}
+\setlist[enumerate]{label=\arabic*.,ref=\arabic*}
+
+\RequirePackage[most]{tcolorbox}
+\tcbset{on line, 
+        boxsep=3mm, 
+        left=3mm,right=3mm,top=3mm,bottom=3mm,
+        boxrule=2pt,
+        colback=white,
+        colframe=white,
+        highlight math style={enhanced},
+        size=small
+        }
+\RequirePackage{pifont}
+\RequirePackage{caption}
+\RequirePackage{hyperref}
+\AtBeginDocument{%
+ \hypersetup{
+   urlcolor=acc-blue,
+   urlbordercolor=acc-blue,
+   % pdfborder={0 0 0},
+   pdfborderstyle={/S/U/W 0}   
+}}
+
+\RequirePackage{subcaption}
+\RequirePackage{graphicx}
+\RequirePackage{twemojis}
+
+\RequirePackage[inkscapeformat=png]{svg}
+
+\RequirePackage{hepnames}
+\RequirePackage[compat=1.1.0]{tikz-feynman}
+\RequirePackage{fancybox}
+\RequirePackage{appendixnumberbeamer}
+
+\RequirePackage{minted}
+\usemintedstyle{monokai}
+\setminted[python]{ breaklines, 
+                    fontsize=\scriptsize,
+                    autogobble=true,
+                    numbersep=8pt,
+                    breaklines}
+
+\useinnertheme{default}
+\useoutertheme{default}
+
+\definecolor{official_green}{HTML}{009440}
+\definecolor{green}{HTML}{006229}
+\definecolor{red}{HTML}{c0504d}
+\definecolor{blue}{HTML}{2e6ea1}
+\definecolor{yellow}{HTML}{f5cf00}
+\definecolor{purple}{HTML}{8064a2}
+\definecolor{gray}{HTML}{808080}
+\definecolor{light}{HTML}{BFBFBF}
+\definecolor{LMU_green}{HTML}{006229}
+\definecolor{LMU_header}{HTML}{FFFFFF}
+\definecolor{LMU_background}{HTML}{FFFFFF}
+
+\definecolor{myred}{HTML}{d39895}
+\definecolor{myblue}{HTML}{a6bbd8}
+\definecolor{mygreen}{HTML}{70b86a}
+
+\definecolor{eosblue}{HTML}{98c4dd}
+\definecolor{eosred}{HTML}{f0a497}
+\definecolor{eospurple}{HTML}{ccc6ea}
+
+\definecolor{acc-blue}{RGB}{87,144,252}
+\definecolor{acc-orange}{RGB}{248,156,32}
+\definecolor{acc-red}{RGB}{228,37,54} 
+
+\setbeamercolor{structure}{bg=white,fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=blue}
+\setbeamercolor{palette primary}{fg=white,bg=blue}
+\setbeamercolor{footline}{fg=black, bg=white}
+\setbeamercolor{background canvas}{bg=LMU_background}%
+\setbeamercolor{author in head/foot}{fg=black,bg=}
+\setbeamercolor{title}{fg=black,bg=}
+\setbeamercolor{institute}{fg=black,bg=}
+\setbeamercolor{frametitle}{fg=black,bg=}
+\setbeamercolor{framesubtitle}{fg=black,bg=}
+\setbeamercolor{block body}{bg=LMU_background}
+\setbeamercolor{block title}{bg=black, fg=white}
+\setbeamercolor{block body alerted}{parent=block body}
+\setbeamercolor{block body example}{parent=block body}
+\setbeamercolor{block title alerted}{fg=white,bg=red}
+\setbeamercolor{block title example}{fg=white,bg=blue}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=black}
+
+% set some font sizes
+% \setmainfont{qag}
+% \setmainfont{HelveticaNeue}
+\setbeamerfont{frametitle}{size=\fontsize{20pt}{1em}\selectfont, series=\mdseries}
+\setbeamerfont{framesubtitle}{size=\fontsize{16pt}{1em}\selectfont, series=\mdseries}
+\setbeamerfont{title}{size=\fontsize{20pt}{1em}\selectfont, series=\mdseries}
+\setbeamerfont{subtitle}{size=\fontsize{16pt}{1em}\selectfont, series=\mdseries}
+\setbeamerfont{institute}{size=\normalsize, shape=\itshape}
+
+% disable navigation symbols, never found them useful
+\setbeamertemplate{navigation symbols}{}
+
+\defbeamertemplate{headline}{lmu boxen}{%
+  \begin{tikzpicture}%
+    \useasboundingbox (0, 0) rectangle (\paperwidth, 15mm);%
+    \fill[color=LMU_header] (0, 0) rectangle (\paperwidth, 15mm);%
+    \node[anchor=south west, inner sep=0pt] (box1) at (0, 0) {%
+      \includegraphics[height=15mm]{beamerthemeLMU/beamerthemeLMU_logo.pdf}%
+    };%
+  \end{tikzpicture}
+}
+\def\insertframetitle{}
+\defbeamertemplate*{headline}{lmu siegel}{%
+  \begin{tikzpicture}
+    \coordinate (topright) at (\paperwidth, 15mm);
+    \useasboundingbox (0, 0) rectangle (topright);
+    \fill[color=LMU_header] (0, 5mm) rectangle (topright);
+    \node[anchor=north east, inner sep=0pt] (siegel) at (topright) {%
+      \includegraphics[width=1.5cm]{common/logos/belle2logo.pdf}%
+    };
+    \node[anchor=west, text depth=0pt] (title) at (2mm, 10mm)
+      {{\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle}};
+  \end{tikzpicture}%
+}
+
+\defbeamertemplate*{frametitle}{lmu siegel}{%
+  \ifx\insertframesubtitle\@empty%
+  \else%
+  {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+  \fi%
+}
+
+\defbeamertemplate{frametitle}{lmu boxen}{%
+  \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par%
+  {%
+    \ifx\insertframesubtitle\@empty%
+    \else%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+    \fi%
+  }%
+}
+
+\defbeamertemplate{background}{lmu siegel}{%
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\paperwidth, \paperheight);%
+  \node[anchor=south east, inner sep=0pt] (siegel) at (\paperwidth, 0) {%
+    \includegraphics[width=3cm]{common/logos/belle2logo.pdf}%
+  };
+  \end{tikzpicture}
+}
+
+\defbeamertemplate*{footline}{lmu}
+{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{footline}%
+    \hspace*{2ex}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{footline}%
+    \insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{footline}%
+    \insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\defbeamertemplate*{title page}{lmu}
+{
+  \vfill
+  \begingroup
+    \centering
+    \vskip-1em
+    \begin{beamercolorbox}[sep=4pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \ifx\insertauthor\@empty%
+    \else%
+      \begin{beamercolorbox}[sep=4pt, center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \fi%
+    \ifx\insertinstitute\@empty%
+    \else%
+      \begin{beamercolorbox}[sep=4pt, center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \fi%
+    \ifx\insertdate\@empty%
+    \else%
+      \begin{beamercolorbox}[sep=4pt, center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+    \fi%
+  \endgroup
+  \vfill
+}
+
+\NewDocumentCommand{\setLMUStyle}{s}{%
+  \IfBooleanTF{#1}{%
+    \setbeamertemplate{headline}[lmu boxen]%
+    \setbeamertemplate{frametitle}[lmu boxen]%
+    \setbeamertemplate{footline}{}%
+    \setbeamertemplate{background}[lmu siegel]%
+  }{%
+    \setbeamertemplate{headline}[lmu siegel]%
+    \setbeamertemplate{frametitle}[lmu siegel]%
+    \setbeamertemplate{footline}[lmu]%
+    \setbeamertemplate{background}{}%
+  }%
+}
+
+\ifbeamer@themeLMU@patchframe%
+  \RequirePackage{etoolbox}
+  \BeforeBeginEnvironment{frame}{%
+    \setLMUStyle%
+  }%
+  \define@key{beamerframe}{titleslide}[true]{%
+    \setLMUStyle*%
+  }%
+\else%
+\fi%
+
+\mode
+<all>
