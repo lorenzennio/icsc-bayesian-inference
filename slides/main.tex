@@ -55,7 +55,6 @@ professionalfonts
 \centering
 \Large
 What is a probability?
-    
 \end{frame}
 
 \begin{frame}{Kolmogorov's probability axioms}
@@ -77,9 +76,11 @@ $$p(x|y) = \frac{p(x \cup y)}{p(y)}$$
 \end{frame}
 
 \begin{frame}{Probability interpretations}
-    The probability axioms and probability rules allow you to calculate new probabilities from old ones. 
-
-    But axioms do not tell you how to assign probabilities to begin with. For this we need probability interpretations. 
+    The probability axioms and probability rules
+    \begin{itemize}
+        \item allow you to calculate new probabilities from old ones.
+        \item do not tell you how to assign probabilities to begin with. For this we need probability interpretations.
+    \end{itemize}
 
     The interpretations share the same mathematical framework, but the meaning of $p(x)$ is different.
 \end{frame}
@@ -88,7 +89,7 @@ $$p(x|y) = \frac{p(x \cup y)}{p(y)}$$
 Assign a probability as relative frequency
 $$
 p(x) = \lim_{n\to\infty} \frac{n_x}{n}
-$$ 
+$$
 
 \begin{itemize}
     \item Can only be assigned to repeatable experiments
@@ -120,12 +121,27 @@ $$p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{th
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Bayesian updating}
+    Parameter values $\theta$ under which data $x_1, x_2$ is more probable on average get weighted up, other values get weighted down.
+    $$
+    p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta)
+    $$
+\end{frame}
+
+\begin{frame}{Bayesian updating}
+    % \vspace{-1cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
+    \end{figure}
+\end{frame}
+
 \begin{frame}{The common ground}
-\textbf{Frequentist inference} is based on 
+\textbf{Frequentist inference} is based on
 \begin{itemize}
     \item the model of the observable data \textbf{$$p(x|\theta)$$}
 \end{itemize}
-\textbf{Bayesian inference} is based on 
+\textbf{Bayesian inference} is based on
 \begin{itemize}
     \item the model of the observable data \textbf{$$p(x|\theta)$$}
     \item your prior belief $$p(\theta)$$
@@ -136,22 +152,9 @@ $$p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{th
 For many inference problems, the frequentist and Bayesian approaches give similar numerical
 values, even though they answer different questions and are based on fundamentally different interpretations of probability.
 
-Pour all energy into constructing the best possible \textbf{$p(x|\theta)$}
-\end{frame}
+\vspace{1cm}
 
-\begin{frame}{Bayesian updating}
-Parameter values $\theta$ under which data $x_1, x_2$ is more probable on average get weighted up, other values get weighted down.
-$$
-p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta)
-$$
-\end{frame}
-
-\begin{frame}{Bayesian updating}
-% \vspace{-1cm}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
-\end{figure}
+Pour all energy into constructing the best possible \textbf{$p(x|\theta)$}.
 \end{frame}
 
 \begin{frame}
@@ -162,7 +165,7 @@ Nuisance parameters and priors
 
 \begin{frame}{Frequentist nuisance parameters}
 
-Models are not perfect \arrow \textbf{systematic bias} 
+Models are not perfect \arrow \textbf{systematic bias}
 
 More general models include additional \textbf{nuisance} parameters, $\nu$,
 $$p(x|\theta, \nu)$$
@@ -176,29 +179,24 @@ Want to constrain nuisance parameters, but in the frequentist language \textbf{e
 
 % Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated, which results in an enlargement of the contour defined by Eq. (40.13).
 
-% To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y. 
+% To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
 
-% L(θ, ν) = P (x|θ, ν)P (y|ν) . 
+% L(θ, ν) = P (x|θ, ν)P (y|ν) .
 
 % Note that in this case if one wants to simulate the experiment by means of Monte Carlo, both the primary and control measurements, x and y, must be generated for each repetition under assumption of fixed values for the parameters θ and ν.
 
-% Using all of the parameters (θ, ν) in Eq. (40.13) to find the statistical errors in the parameters of interest θ is equivalent to using the profile likelihood, which depends only on θ. It is defined as Lp(θ) = L(θ,̂̂ ν(θ)), 
+% Using all of the parameters (θ, ν) in Eq. (40.13) to find the statistical errors in the parameters of interest θ is equivalent to using the profile likelihood, which depends only on θ. It is defined as Lp(θ) = L(θ,̂̂ ν(θ)),
 
 \end{frame}
 
-\begin{frame}{... everything is data}    
-    "\textit{The great advantage of the Bayesian approach is that it allows you to incorporate subjective beliefs, while the Frequentist approach pretends that you don't have any.}" 
+\begin{frame}{... everything is data}
+    "\textit{The great advantage of the Bayesian approach is that it allows you to incorporate subjective beliefs, while the Frequentist approach pretends that you don't have any.}"
     \flushright -- associated with Jim Berger by ChatGPT
 \end{frame}
 
-\begin{frame}{... everything is data}    
-
-    
-
-    % We have a lot of prior knowledge, to just ignore it would be mad.
-
+\begin{frame}{... everything is data}
     {\centering Are we being honest here?}
-    
+
     Prior knowledge in a typical frequientist analysis
     \begin{itemize}
         \item theory predictions
@@ -242,9 +240,9 @@ Parameter inference
     \center
     \textbf{Point estimates}\\
     Identify the most probable parameter point.
-    
+
     \vspace{1cm}
-    
+
     \textbf{Interval estimation}\\
     Identify extended regions in parameter space based on compatibility with the data.
 \end{frame}
@@ -256,7 +254,7 @@ Parameter inference
         \item \textit{consistency} $\lim_{N_x \to \infty} E(\hat \theta) = \theta_{true}$
         % converges toward true value as number of observations increase
         \item \textit{unbiasedness} $b = E(\hat \theta) - \theta_{true}$
-        % 
+        %
         \item \textit{efficiency} (minimum variance)
         \item ...
     \end{itemize}
@@ -326,7 +324,6 @@ If an estimator PDF is not Normal, $\hat \theta \pm \sigma_\theta$ is meaningles
     \centering
     \includegraphics[width=0.6\linewidth]{../plots/gamma.pdf}
 \end{figure}
-    
 \end{frame}
 
 \begin{frame}{Frequentist intervals}
@@ -343,7 +340,6 @@ $$
     \includegraphics[width=\linewidth]{../plots/neyman.png}
 \end{figure}
 \end{minipage}
-    
 \end{frame}
 
 \begin{frame}{Bayesian intervals}
@@ -353,12 +349,12 @@ $$
 1-\alpha = \int_{\theta_l}^{\theta_u} d\theta ~ p(\theta, x)
 $$
 \begin{itemize}
-    \item For upper/lower limits: set $\theta_l$ or $\theta_u$ manually
+    \item For upper/lower limits: set $\theta_l$ or $\theta_u$ to boundary
     \item Highest (posterior) density intervals (HDI): smallest possible interval
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{A simple linear model}
     % https://www.pp.rhul.ac.uk/~cowan/stat/beijing10/cowan_beijing10_5.pdf
     % https://pdg.lbl.gov/2024/reviews/rpp2024-rev-statistics.pdf
 
@@ -373,7 +369,7 @@ $$
 
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{A simple linear model}
     \begin{itemize}
         \item Our independent data: $x_i, y_i, \sigma_i$
         \item Our model:
@@ -383,7 +379,7 @@ $$
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Likelihood}
+\begin{frame}{Unconstrained likelihood}
 \vspace{-1cm}
     $$ -2\log p(\mathbf{x}|\theta_0, \theta_1) = \sum_{x_i \in \mathbf{x}}\frac{\left(x_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2}$$
     \begin{figure}
@@ -392,7 +388,7 @@ $$
     \end{figure}
 \end{frame}
 
-\begin{frame}{Constrained likelihood}
+\begin{frame}{Including a measurement $t_1$ of $\theta_1$}
 \vspace{-1cm}
     $$ -2\log p(\mathbf{x}|\theta_0, \theta_1) = \sum_{x_i \in \mathbf{x}}\frac{\left(x_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2} + \frac{\left(\theta_1 -t_1\right)^2}{\sigma_{t_1}^2} $$
     \begin{figure}
@@ -407,6 +403,7 @@ $$
     \begin{minipage}{0.49\linewidth}
         $$\pi(\theta_0) = \text{Uniform}(0,2)$$
         $$\pi(\theta_1) = \text{Gauss}(\theta_1 | t_1, \sigma_{t_1})$$
+        \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are nice for visualization.
     \end{minipage}
     \begin{minipage}{0.49\linewidth}
     \begin{figure}
@@ -420,11 +417,11 @@ $$
 \vspace{-1cm}
     $$p(\theta_0|\mathbf{x}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\mathbf{x}) = \text{Gauss}(\theta_0 | \hat \theta_0, \sigma_{\theta_0})$$
     \begin{minipage}{0.49\linewidth}
-    In this case, we get: 
+    In this case, we get:
         \begin{itemize}
             \item Same $\hat \theta_0$ as for ML
             $$
-            \hat \theta_0 = 
+            \hat \theta_0 =
             $$
             \item Same $\sigma_{\theta_0}$ as for ML
             $$
@@ -450,11 +447,11 @@ MCMC
 \begin{itemize}
     \item Usually, we are not interested in the nuisance parameters $\nu$.
     \item One can obtain the posterior p.d.f. for $\theta$ alone by integrating over $\nu$.
-    \item The \textit{marginal posterior} is 
+    \item The \textit{marginal posterior} is
         $$
         p(\theta | x) = \int d\nu ~ p(\theta, \nu | x)
         $$
-    \item High dimensional integral \arrow compute with Monte Carlo methods.    
+    \item Commonly a high dimensional integral\\ \arrow compute with Monte Carlo methods.
 \end{itemize}
 \end{frame}
 
@@ -466,16 +463,30 @@ MCMC
     % https://doi.org/10.3390/app10010272
 \end{frame}
 
+\begin{frame}{Markov Process}
+    The next element in the sequence (the Markov Chain) is proposed as a random variate $y_{i + 1}$ of a PDF $g$ that is conditioned on a location parameter, set to the current location $\theta_i$,
+    $$
+    \ldots \to \theta_{i} \sim g(\theta_{i} | \theta_{i-1}) \to \theta_{i+1} \sim g(\theta_{i+1} | \theta_{i}) \to \ldots
+    $$
+    %TODO proposal distribution
+\end{frame}
+
 \begin{frame}{Metropolis-Hastings}
 
 \begin{enumerate}
     \item Generate $\theta \sim g(\theta|\theta_0)$
-    \item Form Hastings test ratio $\alpha = \text{min}\left( \frac{p(\theta)g(\theta|\theta_0)}{p(\theta_0)g(\theta_0|\theta)}\right)$
-    \item Generate $u \sim \text{Uniform}(0, 1)$
-    \item If $u \leq \alpha$, let $\theta_1 = \theta$. Otherwise, let $\theta_1 = \theta_0$
+    \item Set $\theta_1$,
+    \begin{equation*}
+        \theta_1 =
+        \begin{cases}
+            \theta  &\quad u \leq \text{min}\left(1, \frac{p(\theta)g(\theta|\theta_0)}{p(\theta_0)g(\theta_0|\theta)}\right)\\
+            \theta_0 &\quad \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    where $u \sim \text{Uniform}(0, 1)$
     \item Set  $\theta_0 = \theta_1$ and return to step 1.
 \end{enumerate}
-    
+\textit{Note}: We need to define a proposal distribution $g(\theta|\theta_0)$.
 \end{frame}
 
 \begin{frame}{Chains}
@@ -510,44 +521,45 @@ MCMC
 \end{frame}
 
 \begin{frame}{Tools to try}
-arviz, corner, pymc
+\begin{figure}
+    \href{
+        https://www.pymc.io/
+    }{\includegraphics[width=0.4\textwidth]{../plots/pymc.png}}
+    \hfill
+    \href{
+        https://python.arviz.org/en/stable/
+    }{\includegraphics[width=0.4\textwidth]{../plots/arviz.png}}
+\end{figure}
 \end{frame}
 
-\begin{frame}{Exercises}
+% \begin{frame}{Exercises}
 
-\textbf{a simple MCMC algorithm}\\
+% \textbf{a simple MCMC algorithm}\\
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}{Exercises: s+b problem}
-\small
-You do a binned analysis. You observe [155, 121,  13] in each bin respectively. From simulation, you expect to see [90, 30, 0] signal events (where the last bin acts as a control measurement) and [50, 70, 10] background events.\\
-Hint: It is better to work with log-probabilities
-    
-\end{frame}
+% \begin{frame}{Exercises: s+b problem}
+% \small
+% You do a binned analysis. You observe [155, 121,  13] in each bin respectively. From simulation, you expect to see [90, 30, 0] signal events (where the last bin acts as a control measurement) and [50, 70, 10] background events.\\
+% Hint: It is better to work with log-probabilities
+% \end{frame}
 
-\begin{frame}{Exercises: s+b problem}
-\small
-\begin{itemize}
-    \item Construct a likelihood function (chi2)
-    \item What is the best fit point?
-    \item What are the frequentist limits?
-    \item What would a sensible choice of priors be for this example?
-    \item Use an implementation of the Metropolis Hastings algorithm to sample from the posterior
-    \item Make a corner plot of the posterior
-    \item How do the mode of the posterior and the credible intervals compare to the best fit point and frequentist limits?
-\end{itemize}
-    
-\end{frame}
+% \begin{frame}{Exercises: s+b problem}
+% \small
+% \begin{itemize}
+%     \item Construct a likelihood function (chi2)
+%     \item What is the best fit point?
+%     \item What are the frequentist limits?
+%     \item What would a sensible choice of priors be for this example?
+%     \item Use an implementation of the Metropolis Hastings algorithm to sample from the posterior
+%     \item Make a corner plot of the posterior
+%     \item How do the mode of the posterior and the credible intervals compare to the best fit point and frequentist limits?
+% \end{itemize}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 
-\begin{frame}
-    \center
-    \Large
-    Solutions to exercises
-\end{frame}
 
 
 
