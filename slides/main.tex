@@ -9,7 +9,6 @@ professionalfonts
 ]{beamer}
 
 \usetheme[patchframe=true]{LMU}
-
 % \usepackage{fontspec}
 % \setsansfont{Source Sans Pro}
 % \setmonofont{Fira Code}[Contextuals=Alternate]
@@ -26,7 +25,7 @@ professionalfonts
 
 \DeclareMathOperator\supp{supp}
 
-\title[]{Bayesian inference in particle physics}
+\title[]{A Hidden Gem: \\ Unlocking the Power of Bayesian Inference in Particle Physics}
 
 \author[L. G\"artner]{\underline{Lorenz G\"artner}$^{1}$, Toni Sculac, Judith Katzy }
 
@@ -50,39 +49,59 @@ professionalfonts
     \end{tikzpicture}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{About me}
+    \begin{minipage}{0.69\textwidth}
+        \begin{itemize}
+            \item BSc @ University of Manchester \\
+                Physics with theoretical physics\\
+                Little stats
+            \item MSc @ LMU Munich \\
+                Thesis on QFT in curved spacetime\\
+                Almost no stats
+            \item Currenly PhD @ LMU Munich\\
+                A lot of stats
+        \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.3\textwidth}
+        \begin{figure}
+            \center
+            \includegraphics[width=\textwidth]{../plots/port.jpg}
+        \end{figure}
+    \end{minipage}
+\end{frame}
 
+\begin{frame}
 \centering
 \Large
 What is a probability?
 \end{frame}
 
-\begin{frame}{Kolmogorov's probability axioms}
+\begin{frame}{Kolmogorov probability axioms}
 % https://plato.stanford.edu/entries/probability-interpret/#MaiInt
 \begin{enumerate}
   \item $ p(\Omega) = 1 $, where \( \Omega \) is the sample space.
   \item $ p(x) \geq 0 $ for any event \( x \subseteq \Omega \).
-  \item For any sequence of disjoint events \( x_1, x_2, \dots \), 
+  \item For any sequence of disjoint events \( x_1, x_2, \dots \),
         $$
-        p\left( \bigcup_{i=1}^{\infty} x_i \right) = \sum_{i=1}^{\infty} p(x_i)
+        p\left( \bigcup_{i=1} x_i \right) = \sum_{i=1} p(x_i)
         $$
 \end{enumerate}
 \end{frame}
 
 
 \begin{frame}{Conditional probability}
-Is \textbf{defined} as the probability of an event $x$ if we know that an event $y$ is true
-$$p(x|y) = \frac{p(x \cup y)}{p(y)}$$
+Is \textbf{defined} as the probability of an event $x$ if we know that an event $y$ is true $p(x|y)$.
+$$p(x \cup y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cup y)}{p(y)}$$
 \end{frame}
 
 \begin{frame}{Probability interpretations}
-    The probability axioms and probability rules
+    The probability axioms and rules
     \begin{itemize}
         \item allow you to calculate new probabilities from old ones.
         \item do not tell you how to assign probabilities to begin with. For this we need probability interpretations.
     \end{itemize}
 
-    The interpretations share the same mathematical framework, but the meaning of $p(x)$ is different.
+    The interpretations \textbf{share the same mathematical framework}, but the meaning of $p(x)$ is different.
 \end{frame}
 
 \begin{frame}{Frequentist interpretation}
@@ -108,53 +127,47 @@ Assign a probability $p(x)$ as \textit{degree of belief}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Bayesian inference}
+\begin{frame}{Bayes' theorem}
 
-The Bayesian posterior is
+The \textbf{posterior} is
 
 $$p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{theory})}{p(\text{data})}$$
 
 \begin{itemize}
     \item \textbf{Likelihood} $p(\text{data}|\text{theory})$
     \item \textbf{Prior} $p(\text{theory})$
-    \item \textbf{Evidence} $p(\text{data}) = \int p(\text{data}|\text{theory}) p(\text{theory}$
+    \item \textbf{Evidence} $p(\text{data}) = \int p(\text{data}|\text{theory}) p(\text{theory})$
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Bayesian updating}
-    Parameter values $\theta$ under which data $x_1, x_2$ is more probable on average get weighted up, other values get weighted down.
-    $$
-    p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta)
-    $$
-\end{frame}
-
-\begin{frame}{Bayesian updating}
-    % \vspace{-1cm}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
-    \end{figure}
+\begin{flushright}
+    \textit{Can you derive it?}
+\end{flushright}
 \end{frame}
 
 \begin{frame}{The common ground}
-\textbf{Frequentist inference} is based on
-\begin{itemize}
-    \item the model of the observable data \textbf{$$p(x|\theta)$$}
-\end{itemize}
-\textbf{Bayesian inference} is based on
-\begin{itemize}
-    \item the model of the observable data \textbf{$$p(x|\theta)$$}
-    \item your prior belief $$p(\theta)$$
-\end{itemize}
+    \textbf{Frequentist inference} is based on
+    \begin{itemize}
+        \item the model of the observable data \textbf{$$p(x|\theta)$$}
+    \end{itemize}
+    \textbf{Bayesian inference} is based on
+    \begin{itemize}
+        \item the model of the observable data \textbf{$$p(x|\theta)$$}
+        \item your prior belief $$p(\theta)$$
+    \end{itemize}
+    \arrow You want the best possible \textbf{$p(x|\theta)$}.
+\end{frame}
+
+\begin{frame}[noframenumbering]{The best possible model...}
+    \begin{figure}
+        \includegraphics[width=0.4\textwidth]{../plots/sample_size.jpg}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Physics does not care...}{... about our interpretation}
-For many inference problems, the frequentist and Bayesian approaches give similar numerical
-values, even though they answer different questions and are based on fundamentally different interpretations of probability.
+For many inference problems, the frequentist and Bayesian approaches give similar numerical values, even though they answer different questions.
 
-\vspace{1cm}
+\vspace{0.5cm}
 
-Pour all energy into constructing the best possible \textbf{$p(x|\theta)$}.
+BUT if results are different, you should understand why.
 \end{frame}
 
 \begin{frame}
@@ -166,26 +179,14 @@ Nuisance parameters and priors
 \begin{frame}{Frequentist nuisance parameters}
 
 Models are not perfect \arrow \textbf{systematic bias}
-
-More general models include additional \textbf{nuisance} parameters, $\nu$,
-$$p(x|\theta, \nu)$$
-
-Leads to increased statistical uncertainties on POIs (due to correlation)
-
-Want to constrain nuisance parameters, but in the frequentist language \textbf{everything is data}.
-
-
 % In general the model is not perfect, which is to say it cannot provide an accurate description of the data even at the most optimal point of its parameter space. As a result, the estimated parameters can have a systematic bias.
 
-% Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated, which results in an enlargement of the contour defined by Eq. (40.13).
+\textit{Solution}: Include additional \textbf{nuisance} parameters $\nu$,
+$$p(x|\theta, \nu).$$
+% Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated.
 
+Usually, we want to constrian nuisance parameters, but in the frequentist language \textbf{everything is data}.
 % To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
-
-% L(θ, ν) = P (x|θ, ν)P (y|ν) .
-
-% Note that in this case if one wants to simulate the experiment by means of Monte Carlo, both the primary and control measurements, x and y, must be generated for each repetition under assumption of fixed values for the parameters θ and ν.
-
-% Using all of the parameters (θ, ν) in Eq. (40.13) to find the statistical errors in the parameters of interest θ is equivalent to using the profile likelihood, which depends only on θ. It is defined as Lp(θ) = L(θ,̂̂ ν(θ)),
 
 \end{frame}
 
@@ -197,10 +198,10 @@ Want to constrain nuisance parameters, but in the frequentist language \textbf{e
 \begin{frame}{... everything is data}
     {\centering Are we being honest here?}
 
-    Prior knowledge in a typical frequientist analysis
+    Prior knowledge in a typical frequentist analysis
     \begin{itemize}
         \item theory predictions
-        \item model parameters (masses, couplings, ...)
+        \item model parameters
         \item missing higher-order corrections
         \item MC normalizations
         \item ...
@@ -210,9 +211,9 @@ Want to constrain nuisance parameters, but in the frequentist language \textbf{e
 
 \begin{frame}{Frequentist "priors"}
 Constrain nuisance parameters using "auxiliary data" $a$,
-$$L(\theta, \nu) = p(x| \theta, \nu) p(a| \nu)$$
+$$p(x| \theta, \nu) p(a| \nu)$$
 
-$p(a, \nu)$ represents our "degree of belief" in $\nu$.
+$p(a| \nu)$ represents our "degree of belief" in $\nu$.
 
 \vspace{0.5cm}
 
@@ -220,14 +221,34 @@ Often "auxiliary data" is \textit{created} to match our desired constraint term.
 \end{frame}
 
 \begin{frame}{Bayesian nuisance parameters}
-If one has auxiliary data, the prior is
+Priors can be defined using auxiliary data
 $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
-If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
+%If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
 
-In the Bayesian case, other prior choices are also allowed, e.g.
+Only in the Bayesian case, other prior choices are also allowed, e.g.
 $$ p(\nu) = \text{Gauss}(\nu | \nu_0, \sigma_\nu)$$
 
-Bayesian approach also requires priors for POIs.
+% Bayesian approach also requires priors for POIs.
+\end{frame}
+
+\begin{frame}{Bayesian updating}
+    A posterior based on all LHC data $x_{LHC}$
+    $$
+    p(\theta | x_{LHC}) = \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta)
+    $$
+    can be updated with LHC-HL data $x_{HL}$, with $p(\theta | x_{LHC})$ as a prior
+    $$
+    p(\theta | x_{LHC}, x_{HL}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} p(\theta | x_{LHC}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta).
+    $$
+    % Parameter values $\theta$ under which data $x_{LHC}, x_{HL}$ is more probable on average get weighted up, other values get weighted down.
+\end{frame}
+
+\begin{frame}{Bayesian updating}
+    % \vspace{-1cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -269,16 +290,17 @@ Parameter inference
 \end{frame}
 
 \begin{frame}{Method of maximum likelihood}
+    \vspace{-0.2cm}
     We find maximum likelihood estimators $ \hat \theta$ by solving
     $$
-    \frac{\partial \ln L(x|\theta)}{\partial \theta}\mid_{\theta = \hat \theta} = 0
+    \frac{\partial p(x|\theta)}{\partial \theta}\bigg\vert_{\theta = \hat \theta} = 0
     $$
     With the property
     $$
     \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}(0, I^{-1}(\theta))
     $$
     This implies consistency, asymptotic unbiasedness and efficiency
-    $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln L(x|\theta)}{\partial \theta}\right]^{-1}$$
+    $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
 \end{frame}
 
 % \begin{frame}{Asymptotic normality}
@@ -296,8 +318,9 @@ Parameter inference
 
 \begin{frame}{Bayesian point estimates}
     \begin{minipage}{0.49\textwidth}
-        \textbf{Mode / MAP}\\ Value of $\theta$ with maximum a-posteriori probability
-            $$\theta_{MAP} = \text{argmax}_\theta ~ p(\theta|x)$$
+        \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
+            $$\theta^* = \text{argmax}_\theta ~ p(\theta|x)$$
+            % TODO rename
         \textbf{Mean}\\ Expected value of $\theta$ under the posterior
             $$ \bar{\theta} = E_{p(\theta|x)}[\theta]$$
     \end{minipage}
@@ -328,30 +351,46 @@ If an estimator PDF is not Normal, $\hat \theta \pm \sigma_\theta$ is meaningles
 
 \begin{frame}{Frequentist intervals}
 
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.55\linewidth}
 \textbf{Neyman confidence belt}
 $$
-\int_{x_1}^{x_2} dx ~ p(x|\theta) \geq 1-\alpha
+\int_{x_1}^{x_2} dx ~ p(x|\theta) = 1-\alpha
 $$
+Not unique \arrow \textit{central interval}
+\small
+$$
+\int_{-\infty}^{x_1} dx ~ p(x|\theta)=  \int_{x_2}^{\infty} dx ~ p(x|\theta) = \alpha/2
+$$
+\normalsize
+or \textit{upper/lower interval}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{../plots/neyman.png}
-\end{figure}
+\begin{minipage}[t]{0.44\linewidth}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{../plots/neyman.png}
+    \end{figure}
 \end{minipage}
 \end{frame}
 
 \begin{frame}{Bayesian intervals}
 
-Credible intervals $[\theta_l, \theta_u]$ cover $1-\alpha$ of the posterior
+Credible intervals $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
 $$
-1-\alpha = \int_{\theta_l}^{\theta_u} d\theta ~ p(\theta, x)
+\int_{\theta_1}^{\theta_2} d\theta ~ p(\theta| x) = 1-\alpha
 $$
 \begin{itemize}
-    \item For upper/lower limits: set $\theta_l$ or $\theta_u$ to boundary
-    \item Highest (posterior) density intervals (HDI): smallest possible interval
+    \item For upper/lower limits: set $\theta_1$ or $\theta_2$ to boundary
+    \item \textit{Smallest possible interval}\\
+        \arrow Highest (posterior) density intervals (HDI)
 \end{itemize}
+\end{frame}
+
+\begin{frame}{A simple linear model}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\linewidth]{../plots/change_in_slope_2x.png}
+    \end{figure}
+    % https://www.explainxkcd.com/wiki/images/9/9d/change_in_slope_2x.png
 \end{frame}
 
 \begin{frame}{A simple linear model}
@@ -373,7 +412,7 @@ $$
     \begin{itemize}
         \item Our independent data: $x_i, y_i, \sigma_i$
         \item Our model:
-        $$ p(\mathbf{x}|\theta_0, \theta_1) = \prod_{x_i \in \mathbf{x}}\text{Gauss}(x_i | \mu(x_i|\theta_0, \theta_1), \sigma_i)$$
+        $$ p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) = \prod_{x_i, y_i \in \mathbf{x}, \mathbf{y}}\text{Gauss}(y_i | \mu(x_i|\theta_0, \theta_1), \sigma_i)$$
         $$\mu(x_i|\theta_0, \theta_1) = \theta_0 + \theta_1 x_i$$
          \item[\arrow] We want to know about $\theta_0$, do not care about $\theta_1$.
     \end{itemize}
@@ -381,16 +420,16 @@ $$
 
 \begin{frame}{Unconstrained likelihood}
 \vspace{-1cm}
-    $$ -2\log p(\mathbf{x}|\theta_0, \theta_1) = \sum_{x_i \in \mathbf{x}}\frac{\left(x_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2}$$
+    $$ -2\log p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) = \sum_{x_i, y_i \in \mathbf{x}, \mathbf{y}}\frac{\left(y_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2}$$
     \begin{figure}
         \centering
         \includegraphics[width=0.5\linewidth]{../plots/nll_unconstr.pdf}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Including a measurement $t_1$ of $\theta_1$}
+\begin{frame}{Including a measurement of $\theta_1$: $(t_1, \sigma_{t_1})$}
 \vspace{-1cm}
-    $$ -2\log p(\mathbf{x}|\theta_0, \theta_1) = \sum_{x_i \in \mathbf{x}}\frac{\left(x_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2} + \frac{\left(\theta_1 -t_1\right)^2}{\sigma_{t_1}^2} $$
+    $$ -2\log p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) = \sum_{x_i, y_i \in \mathbf{x}, \mathbf{y}}\frac{\left(y_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2} + \frac{\left(\theta_1 -t_1\right)^2}{\sigma_{t_1}^2} $$
     \begin{figure}
         \centering
         \includegraphics[width=0.5\linewidth]{../plots/nll_constr.pdf}
@@ -399,11 +438,11 @@ $$
 
 \begin{frame}{Posterior}
 \vspace{-1cm}
-    $$p(\theta_0, \theta_1|\mathbf{x}) \propto p(\mathbf{x}|\theta_0, \theta_1) \pi(\theta_0)\pi(\theta_1)$$
+    $$p(\theta_0, \theta_1|\mathbf{x}, \mathbf{y}) \propto p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) p(\theta_0)p(\theta_1)$$
     \begin{minipage}{0.49\linewidth}
-        $$\pi(\theta_0) = \text{Uniform}(0,2)$$
-        $$\pi(\theta_1) = \text{Gauss}(\theta_1 | t_1, \sigma_{t_1})$$
-        \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are nice for visualization.
+        $$p(\theta_0) = \text{Uniform}(0,2)$$
+        $$p(\theta_1) = \text{Gauss}(\theta_1 | t_1, \sigma_{t_1})$$
+        \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization.
     \end{minipage}
     \begin{minipage}{0.49\linewidth}
     \begin{figure}
@@ -415,18 +454,18 @@ $$
 
 \begin{frame}{Marginal posterior}
 \vspace{-1cm}
-    $$p(\theta_0|\mathbf{x}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\mathbf{x}) = \text{Gauss}(\theta_0 | \hat \theta_0, \sigma_{\theta_0})$$
+    $$p(\theta_0|\mathbf{x}, \mathbf{y}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\mathbf{x}, \mathbf{y}) = \text{Gauss}(\theta_0 | \hat \theta_0, \sigma_{\theta_0})$$
     \begin{minipage}{0.49\linewidth}
-    In this case, we get:
+    In this example, we get
         \begin{itemize}
-            \item Same $\hat \theta_0$ as for ML
-            $$
-            \hat \theta_0 =
-            $$
-            \item Same $\sigma_{\theta_0}$ as for ML
-            $$
-            \sigma_{\theta_0}^2 = \sum_{x_i,  \sigma_i\in \mathbf{x}, \mathbf{\sigma}}\sigma_{t_1}x_i^2 + \sigma_i^2
-            $$
+            \item $\theta_0^* = \hat \theta_0$
+            % $$
+            % \hat \theta_0 =
+            % $$
+            \item 68\% CI = $\hat \theta_0 \pm \sigma_{\theta_0}$
+            % $$
+            % \sigma_{\theta_0}^2 = \sum_{x_i,  \sigma_i\in \mathbf{x}, \mathbf{\sigma}}\sigma_{t_1}x_i^2 + \sigma_i^2
+            % $$
         \end{itemize}
     \end{minipage}
     \begin{minipage}{0.49\linewidth}
@@ -445,14 +484,22 @@ MCMC
 
 \begin{frame}{The hard part ...}
 \begin{itemize}
-    \item Usually, we are not interested in the nuisance parameters $\nu$.
-    \item One can obtain the posterior p.d.f. for $\theta$ alone by integrating over $\nu$.
-    \item The \textit{marginal posterior} is
+    \item We only want the posterior for $\theta$ alone.
+    \item Remove nuisance parameters by integrating over $\nu$.
+    \item[\arrow] The \textit{marginal posterior} is
         $$
         p(\theta | x) = \int d\nu ~ p(\theta, \nu | x)
         $$
     \item Commonly a high dimensional integral\\ \arrow compute with Monte Carlo methods.
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Markov Process}
+    The next element in the sequence (the Markov Chain) is proposed as a random variate $\theta_{i + 1}$ of a PDF $g$ that is conditioned on a location parameter, set to the current location $\theta_i$,
+    $$
+    \ldots \to \theta_{i} \sim g(\theta_{i} | \theta_{i-1}) \to \theta_{i+1} \sim g(\theta_{i+1} | \theta_{i}) \to \ldots
+    $$
+    %TODO proposal distribution
 \end{frame}
 
 \begin{frame}{Markov Chain Monte Carlo (MCMC)}
@@ -463,28 +510,19 @@ MCMC
     % https://doi.org/10.3390/app10010272
 \end{frame}
 
-\begin{frame}{Markov Process}
-    The next element in the sequence (the Markov Chain) is proposed as a random variate $y_{i + 1}$ of a PDF $g$ that is conditioned on a location parameter, set to the current location $\theta_i$,
-    $$
-    \ldots \to \theta_{i} \sim g(\theta_{i} | \theta_{i-1}) \to \theta_{i+1} \sim g(\theta_{i+1} | \theta_{i}) \to \ldots
-    $$
-    %TODO proposal distribution
-\end{frame}
-
 \begin{frame}{Metropolis-Hastings}
-
+We loop
 \begin{enumerate}
-    \item Generate $\theta \sim g(\theta|\theta_0)$
-    \item Set $\theta_1$,
+    \item Generate $\theta \sim g(\theta|\theta_i)$
+    \item Update
     \begin{equation*}
-        \theta_1 =
+        \theta_{i+1} =
         \begin{cases}
-            \theta  &\quad u \leq \text{min}\left(1, \frac{p(\theta)g(\theta|\theta_0)}{p(\theta_0)g(\theta_0|\theta)}\right)\\
-            \theta_0 &\quad \text{otherwise}
+            \theta  &\quad u \leq \text{min}\left(1, \frac{p(\theta)g(\theta|\theta_i)}{p(\theta_i)g(\theta_i|\theta)}\right)\\
+            \theta_i &\quad \text{otherwise}
         \end{cases}
     \end{equation*}
     where $u \sim \text{Uniform}(0, 1)$
-    \item Set  $\theta_0 = \theta_1$ and return to step 1.
 \end{enumerate}
 \textit{Note}: We need to define a proposal distribution $g(\theta|\theta_0)$.
 \end{frame}
@@ -522,13 +560,18 @@ MCMC
 
 \begin{frame}{Tools to try}
 \begin{figure}
+    \center
     \href{
         https://www.pymc.io/
-    }{\includegraphics[width=0.4\textwidth]{../plots/pymc.png}}
+    }{\includegraphics[width=0.3\textwidth]{../plots/pymc.png}}
+    \hfill
+    \href{
+        https://github.com/bat
+    }{\includegraphics[width=0.3\textwidth]{../plots/bat.pdf}}
     \hfill
     \href{
         https://python.arviz.org/en/stable/
-    }{\includegraphics[width=0.4\textwidth]{../plots/arviz.png}}
+    }{\includegraphics[width=0.3\textwidth]{../plots/arviz.png}}
 \end{figure}
 \end{frame}
 
