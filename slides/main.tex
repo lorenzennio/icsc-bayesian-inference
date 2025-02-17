@@ -95,12 +95,12 @@ $$p(x \cup y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cup y)}{p(y)}$$
 \end{frame}
 
 \begin{frame}{Probability interpretations}
-    The probability axioms and rules
-    \begin{itemize}
-        \item allow you to calculate new probabilities from old ones.
-        \item do not tell you how to assign probabilities to begin with. For this we need probability interpretations.
-    \end{itemize}
+    The probability axioms and rules allow you to calculate new probabilities from old ones.
+    
+    \vspace{0.5cm}
+    To assign probabilities we need probability interpretations.
 
+    \vspace{0.5cm}
     The interpretations \textbf{share the same mathematical framework}, but the meaning of $p(x)$ is different.
 \end{frame}
 
@@ -173,87 +173,6 @@ BUT if results are different, you should understand why.
 \begin{frame}
 \center
 \Large
-Nuisance parameters and priors
-\end{frame}
-
-\begin{frame}{Frequentist nuisance parameters}
-
-Models are not perfect \arrow \textbf{systematic bias}
-% In general the model is not perfect, which is to say it cannot provide an accurate description of the data even at the most optimal point of its parameter space. As a result, the estimated parameters can have a systematic bias.
-
-\textit{Solution}: Include additional \textbf{nuisance} parameters $\nu$,
-$$p(x|\theta, \nu).$$
-% Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated.
-
-Usually, we want to constrian nuisance parameters, but in the frequentist language \textbf{everything is data}.
-% To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
-
-\end{frame}
-
-\begin{frame}{... everything is data}
-    "\textit{The great advantage of the Bayesian approach is that it allows you to incorporate subjective beliefs, while the Frequentist approach pretends that you don't have any.}"
-    \flushright -- associated with Jim Berger by ChatGPT
-\end{frame}
-
-\begin{frame}{... everything is data}
-    {\centering Are we being honest here?}
-
-    Prior knowledge in a typical frequentist analysis
-    \begin{itemize}
-        \item theory predictions
-        \item model parameters
-        \item missing higher-order corrections
-        \item MC normalizations
-        \item ...
-    \end{itemize}
-    % https://indico.cern.ch/event/243641/attachments/415317/577061/CERN-Stat-Lectures.pdf
-\end{frame}
-
-\begin{frame}{Frequentist "priors"}
-Constrain nuisance parameters using "auxiliary data" $a$,
-$$p(x| \theta, \nu) p(a| \nu)$$
-
-$p(a| \nu)$ represents our "degree of belief" in $\nu$.
-
-\vspace{0.5cm}
-
-Often "auxiliary data" is \textit{created} to match our desired constraint term.
-\end{frame}
-
-\begin{frame}{Bayesian nuisance parameters}
-Priors can be defined using auxiliary data
-$$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
-%If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
-
-Only in the Bayesian case, other prior choices are also allowed, e.g.
-$$ p(\nu) = \text{Gauss}(\nu | \nu_0, \sigma_\nu)$$
-
-% Bayesian approach also requires priors for POIs.
-\end{frame}
-
-\begin{frame}{Bayesian updating}
-    A posterior based on all LHC data $x_{LHC}$
-    $$
-    p(\theta | x_{LHC}) = \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta)
-    $$
-    can be updated with LHC-HL data $x_{HL}$, with $p(\theta | x_{LHC})$ as a prior
-    $$
-    p(\theta | x_{LHC}, x_{HL}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} p(\theta | x_{LHC}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta).
-    $$
-    % Parameter values $\theta$ under which data $x_{LHC}, x_{HL}$ is more probable on average get weighted up, other values get weighted down.
-\end{frame}
-
-\begin{frame}{Bayesian updating}
-    % \vspace{-1cm}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-\center
-\Large
 Parameter inference
 \end{frame}
 
@@ -269,23 +188,33 @@ Parameter inference
 \end{frame}
 
 \begin{frame}{Frequentist point estimates: estimators}
-    Estimator is a \textit{statistic} $\hat \theta(x)$, i.e. a well chosen function of the data. \\
-    Desired properties
-    \begin{itemize}
-        \item \textit{consistency} $\lim_{N_x \to \infty} E(\hat \theta) = \theta_{true}$
-        % converges toward true value as number of observations increase
-        \item \textit{unbiasedness} $b = E(\hat \theta) - \theta_{true}$
-        %
-        \item \textit{efficiency} (minimum variance)
-        \item ...
-    \end{itemize}
-    %TODO include graphic from James p 130
+    Estimator is a \textit{statistic} $\hat \theta(x)$, i.e. a well chosen function of the data with the desited properties of
+    \begin{minipage}{0.65\textwidth}
+        \begin{itemize}
+            \item \textit{consistency}\\
+            $\lim_{n_x \to \infty} E_x[\hat \theta] = \theta_{true}$
+            % converges toward true value as number of observations increase
+            \item \textit{unbiasedness}\\
+            $b = E_x[\hat \theta] - \theta_{true}$
+            
+            \item \textit{efficiency}\\
+            $V(\hat \theta) = I(\theta)^{-1} = E_x\left[\left(\frac{\partial \ln p(x|\theta)}{\partial \theta}\right)^2\right]^{-1}$
+            % minimum variance
+            \item ...
+        \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.34\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{../plots/selection_bias_2x.png}
+        \end{figure}
+    \end{minipage}
 \end{frame}
 
 \begin{frame}{A good data set is the key to success ...}
-\begin{figure}
+    \begin{figure}
     \centering
-    \includegraphics[width=0.4\linewidth]{../plots/selection_bias_2x.png}
+    \includegraphics[width=0.8\linewidth]{../plots/estimator.pdf}
 \end{figure}
 \end{frame}
 
@@ -297,10 +226,10 @@ Parameter inference
     $$
     With the property
     $$
-    \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}(0, I^{-1}(\theta))
+    \lim_{n \to \infty} p\left(\sqrt{n}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I(\theta)^{-1/2}\right)
     $$
-    This implies consistency, asymptotic unbiasedness and efficiency
-    $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
+    This implies consistency, asymptotic unbiasedness and efficiency.
+    % $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
 \end{frame}
 
 % \begin{frame}{Asymptotic normality}
@@ -320,7 +249,6 @@ Parameter inference
     \begin{minipage}{0.49\textwidth}
         \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
             $$\theta^* = \text{argmax}_\theta ~ p(\theta|x)$$
-            % TODO rename
         \textbf{Mean}\\ Expected value of $\theta$ under the posterior
             $$ \bar{\theta} = E_{p(\theta|x)}[\theta]$$
     \end{minipage}
@@ -385,6 +313,94 @@ $$
 \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+    \center
+    \Large
+    Nuisance parameters and priors
+    \end{frame}
+    
+    \begin{frame}{Frequentist nuisance parameters}
+    
+    Models are not perfect \arrow \textbf{systematic bias}
+    % In general the model is not perfect, which is to say it cannot provide an accurate description of the data even at the most optimal point of its parameter space. As a result, the estimated parameters can have a systematic bias.
+    
+    \textit{Solution}: Include additional \textbf{nuisance} parameters $\nu$,
+    $$p(x|\theta, \nu).$$
+    % Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated.
+    
+    Usually, we want to constrian nuisance parameters, but in the frequentist language \textbf{everything is data}.
+    % To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
+    
+    \end{frame}
+    
+    % \begin{frame}{... everything is data}
+    %     "\textit{The great advantage of the Bayesian approach is that it allows you to incorporate subjective beliefs, while the Frequentist approach pretends that you don't have any.}"
+    %     \flushright -- associated with Jim Berger by ChatGPT
+    % \end{frame}
+    
+    % \begin{frame}{... everything is data}
+    %     {\centering Are we being honest here?}
+    
+    %     Prior knowledge in a typical frequentist analysis
+    %     \begin{itemize}
+    %         \item theory predictions
+    %         \item model parameters
+    %         \item missing higher-order corrections
+    %         \item MC normalizations
+    %         \item ...
+    %     \end{itemize}
+    %     % https://indico.cern.ch/event/243641/attachments/415317/577061/CERN-Stat-Lectures.pdf
+    % \end{frame}
+    
+    \begin{frame}{Frequentist "priors"}
+    Constrain nuisance parameters using \textit{auxiliary data} $a$,
+    $$p(x| \theta, \nu) p(a| \nu)$$
+    
+    $p(a| \nu)$ represents our \textit{degree of belief} in $\nu$.
+    
+    \vspace{0.5cm}
+    
+    Often \textit{auxiliary data} is \textit{created} to match our desired constraint term.
+    \end{frame}
+    
+    \begin{frame}{Bayesian nuisance parameters}
+    Priors can be defined using auxiliary data
+    $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
+    %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
+    
+    Only in the Bayesian case, other prior choices are also allowed, e.g.
+    $$ p(\nu) = \text{Gauss}(\nu | \nu_0, \sigma_\nu)$$
+    
+    % Bayesian approach also requires priors for POIs.
+    \end{frame}
+    
+    \begin{frame}{Bayesian updating}
+        Can generally use measurements to \textit{update} our posterior
+        $$
+        p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} p(\theta | x_1) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
+        $$
+        Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
+
+        % A posterior based on all LHC data $x_{LHC}$
+        % $$
+        % p(\theta | x_{LHC}) = \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta)
+        % $$
+        % can be updated with LHC-HL data $x_{HL}$, with $p(\theta | x_{LHC})$ as a prior
+        % $$
+        % p(\theta | x_{LHC}, x_{HL}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} p(\theta | x_{LHC}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta).
+        % $$
+        % Parameter values $\theta$ under which data $x_{LHC}, x_{HL}$ is more probable on average get weighted up, other values get weighted down.
+    \end{frame}
+    
+    \begin{frame}{Bayesian updating}
+        % \vspace{-1cm}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
+        \end{figure}
+    \end{frame}
+
 \begin{frame}{A simple linear model}
     \begin{figure}
         \centering
@@ -398,7 +414,7 @@ $$
     % https://pdg.lbl.gov/2024/reviews/rpp2024-rev-statistics.pdf
 
     \begin{itemize}
-        \item Our independent data : $x_i, y_i, \sigma_i$
+        \item Our independent data : $\boldsymbol{X} = (x_i, y_i, \sigma_i)$
     \end{itemize}
 
     \begin{figure}
@@ -410,9 +426,9 @@ $$
 
 \begin{frame}{A simple linear model}
     \begin{itemize}
-        \item Our independent data: $x_i, y_i, \sigma_i$
+        \item Our independent data: $\boldsymbol{X} = (x_i, y_i, \sigma_i)$
         \item Our model:
-        $$ p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) = \prod_{x_i, y_i \in \mathbf{x}, \mathbf{y}}\text{Gauss}(y_i | \mu(x_i|\theta_0, \theta_1), \sigma_i)$$
+        $$ p(\boldsymbol{X}|\theta_0, \theta_1) = \prod_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\text{Gauss}(y_i | \mu(x_i|\theta_0, \theta_1), \sigma_i)$$
         $$\mu(x_i|\theta_0, \theta_1) = \theta_0 + \theta_1 x_i$$
          \item[\arrow] We want to know about $\theta_0$, do not care about $\theta_1$.
     \end{itemize}
@@ -420,16 +436,16 @@ $$
 
 \begin{frame}{Unconstrained likelihood}
 \vspace{-1cm}
-    $$ -2\log p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) = \sum_{x_i, y_i \in \mathbf{x}, \mathbf{y}}\frac{\left(y_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2}$$
+    $$ -2\log p(\boldsymbol{X}|\theta_0, \theta_1) = \sum_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\frac{\left(y_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2}$$
     \begin{figure}
         \centering
         \includegraphics[width=0.5\linewidth]{../plots/nll_unconstr.pdf}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Including a measurement of $\theta_1$: $(t_1, \sigma_{t_1})$}
+\begin{frame}{Including a measurement of $\theta_1$: $t_1, \sigma_{t_1}$}
 \vspace{-1cm}
-    $$ -2\log p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) = \sum_{x_i, y_i \in \mathbf{x}, \mathbf{y}}\frac{\left(y_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2} + \frac{\left(\theta_1 -t_1\right)^2}{\sigma_{t_1}^2} $$
+    $$ -2\log p(\boldsymbol{X}|\theta_0, \theta_1) = \sum_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\frac{\left(y_i -\mu(x_i|\theta_0, \theta_1)\right)^2}{\sigma_i^2} + \frac{\left(\theta_1 -t_1\right)^2}{\sigma_{t_1}^2} $$
     \begin{figure}
         \centering
         \includegraphics[width=0.5\linewidth]{../plots/nll_constr.pdf}
@@ -438,40 +454,40 @@ $$
 
 \begin{frame}{Posterior}
 \vspace{-1cm}
-    $$p(\theta_0, \theta_1|\mathbf{x}, \mathbf{y}) \propto p(\mathbf{x}, \mathbf{y}|\theta_0, \theta_1) p(\theta_0)p(\theta_1)$$
-    \begin{minipage}{0.49\linewidth}
+    $$p(\theta_0, \theta_1|\boldsymbol{X}) \propto p(\boldsymbol{X}|\theta_0, \theta_1) p(\theta_0)p(\theta_1)$$
+    \begin{minipage}{0.4\linewidth}
         $$p(\theta_0) = \text{Uniform}(0,2)$$
         $$p(\theta_1) = \text{Gauss}(\theta_1 | t_1, \sigma_{t_1})$$
         \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization.
     \end{minipage}
-    \begin{minipage}{0.49\linewidth}
+    \begin{minipage}{0.59\linewidth}
     \begin{figure}
         \centering
-        \includegraphics[width=0.9\linewidth]{../plots/posterior.pdf}
+        \includegraphics[width=0.8\linewidth]{../plots/posterior.pdf}
     \end{figure}
     \end{minipage}
 \end{frame}
 
 \begin{frame}{Marginal posterior}
 \vspace{-1cm}
-    $$p(\theta_0|\mathbf{x}, \mathbf{y}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\mathbf{x}, \mathbf{y}) = \text{Gauss}(\theta_0 | \hat \theta_0, \sigma_{\theta_0})$$
-    \begin{minipage}{0.49\linewidth}
+    $$p(\theta_0|\boldsymbol{X}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\boldsymbol{X}) = \text{Gauss}(\theta_0 | \theta_0^*, \sigma_{\theta_0})$$
+    \begin{minipage}{0.4\linewidth}
     In this example, we get
         \begin{itemize}
             \item $\theta_0^* = \hat \theta_0$
             % $$
             % \hat \theta_0 =
             % $$
-            \item 68\% CI = $\hat \theta_0 \pm \sigma_{\theta_0}$
+            \item 68\% HDI = $\hat \theta_0 \pm \sigma_{\theta_0}$
             % $$
-            % \sigma_{\theta_0}^2 = \sum_{x_i,  \sigma_i\in \mathbf{x}, \mathbf{\sigma}}\sigma_{t_1}x_i^2 + \sigma_i^2
+            % \sigma_{\theta_0}^2 = \sum_{x_i,  \sigma_i\in \boldsymbol{x}, \boldsymbol{\sigma}}\sigma_{t_1}x_i^2 + \sigma_i^2
             % $$
         \end{itemize}
     \end{minipage}
-    \begin{minipage}{0.49\linewidth}
+    \begin{minipage}{0.59\linewidth}
     \begin{figure}
         \centering
-        \includegraphics[width=0.9\linewidth]{../plots/marginal_posterior.pdf}
+        \includegraphics[width=0.7\linewidth]{../plots/marginal_posterior.pdf}
     \end{figure}
     \end{minipage}
 \end{frame}
@@ -494,12 +510,12 @@ MCMC
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Markov Process}
-    The next element in the sequence (the Markov Chain) is proposed as a random variate $\theta_{i + 1}$ of a PDF $g$ that is conditioned on a location parameter, set to the current location $\theta_i$,
+\begin{frame}{Markov chain}
+    A sequence of events, where probability of the next state depends solely on the current state
     $$
     \ldots \to \theta_{i} \sim g(\theta_{i} | \theta_{i-1}) \to \theta_{i+1} \sim g(\theta_{i+1} | \theta_{i}) \to \ldots
     $$
-    %TODO proposal distribution
+    for some \textit{proposal distribution} $g$. 
 \end{frame}
 
 \begin{frame}{Markov Chain Monte Carlo (MCMC)}
@@ -524,7 +540,7 @@ We loop
     \end{equation*}
     where $u \sim \text{Uniform}(0, 1)$
 \end{enumerate}
-\textit{Note}: We need to define a proposal distribution $g(\theta|\theta_0)$.
+\textit{Note}: Need to define a proposal distribution $g(\theta|\theta_0)$.
 \end{frame}
 
 \begin{frame}{Chains}
@@ -532,13 +548,22 @@ We loop
     $$
     \theta_0 \to \theta_1 \to \theta_2 \to \ldots
     $$
-    Only starting at one point can land you in local minima, hence often we sample
-    \begin{align*}
-        &\theta_0^0 \to \theta_1^0 \to \theta_2^0 \to \ldots \\
-        &\theta_0^1 \to \theta_1^1 \to \theta_2^1 \to \ldots \\
-        &\theta_0^2 \to \theta_1^2 \to \theta_2^2 \to \ldots \\
-        &\ldots
-    \end{align*}
+    \begin{minipage}{0.49\textwidth}
+        Only one start can land you in local minima.
+        \begin{align*}
+            &\theta_0^0 \to \theta_1^0 \to \theta_2^0 \to \ldots \\
+            &\theta_0^1 \to \theta_1^1 \to \theta_2^1 \to \ldots \\
+            &\theta_0^2 \to \theta_1^2 \to \theta_2^2 \to \ldots \\
+            &\ldots
+        \end{align*}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.9\textwidth]{../plots/chain_walk.pdf}
+        \end{figure}
+    \end{minipage}
+
 \end{frame}
 
 \begin{frame}{Convergence}
@@ -562,12 +587,12 @@ We loop
 \begin{figure}
     \center
     \href{
-        https://www.pymc.io/
-    }{\includegraphics[width=0.3\textwidth]{../plots/pymc.png}}
-    \hfill
-    \href{
         https://github.com/bat
     }{\includegraphics[width=0.3\textwidth]{../plots/bat.pdf}}
+    \hfill
+    \href{
+        https://www.pymc.io/
+    }{\includegraphics[width=0.35\textwidth]{../plots/pymc.png}}
     \hfill
     \href{
         https://python.arviz.org/en/stable/
