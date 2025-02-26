@@ -34,6 +34,7 @@ professionalfonts
 \date{\today}
 
 \begin{document}
+%TODO references
 
 \begin{frame}[titleslide]
     \titlepage
@@ -91,7 +92,10 @@ What is a probability?
 
 \begin{frame}{Conditional probability}
 Is \textbf{defined} as the probability of an event $x$ if we know that an event $y$ is true $p(x|y)$.
-$$p(x \cup y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cup y)}{p(y)}$$
+$$p(x \cap y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cap y)}{p(y)}$$
+
+\textit{Note} 
+$$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$ 
 \end{frame}
 
 \begin{frame}{Probability interpretations}
@@ -107,7 +111,7 @@ $$p(x \cup y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cup y)}{p(y)}$$
 \begin{frame}{Frequentist interpretation}
 Assign a probability as relative frequency
 $$
-p(x) = \lim_{n\to\infty} \frac{n_x}{n}
+p(x) = \lim_{N\to\infty} \frac{N_x}{N}
 $$
 
 \begin{itemize}
@@ -144,16 +148,11 @@ $$p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{th
 \end{frame}
 
 \begin{frame}{The common ground}
-    \textbf{Frequentist inference} is based on
-    \begin{itemize}
-        \item the model of the observable data \textbf{$$p(x|\theta)$$}
-    \end{itemize}
+    \textbf{Frequentist inference} is based on 
+    $$\textcolor{red}{p(x|\theta)}$$
     \textbf{Bayesian inference} is based on
-    \begin{itemize}
-        \item the model of the observable data \textbf{$$p(x|\theta)$$}
-        \item your prior belief $$p(\theta)$$
-    \end{itemize}
-    \arrow You want the best possible \textbf{$p(x|\theta)$}.
+    $$p(\theta | x) = \frac{\textcolor{red}{p(x|\theta)} p(\theta)}{p(x)}$$
+    \arrow You want the best possible $\textcolor{red}{p(x|\theta)}$.
 \end{frame}
 
 \begin{frame}[noframenumbering]{The best possible model...}
@@ -226,7 +225,7 @@ Parameter inference
     $$
     With the property
     $$
-    \lim_{n \to \infty} p\left(\sqrt{n}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I(\theta)^{-1/2}\right)
+    \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right)
     $$
     This implies consistency, asymptotic unbiasedness and efficiency.
     % $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
@@ -313,6 +312,26 @@ $$
 \end{itemize}
 \end{frame}
 
+\begin{frame}{$b\to u l^- \bar \nu$ in the Weak Effective Theory}
+    \vspace{-0.5cm}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}
+            \includegraphics[width=\textwidth]{../plots/wet-posterior.png}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \begin{itemize}
+            \item \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization.
+            \item Marginal posterior for Wilson coefficients
+            \item Identify modes, credible intervals
+            \item Best fit point $\neq$ mode, why?
+        \end{itemize}
+        \vspace{1cm}
+        \begin{flushright}
+            \href{https://arxiv.org/pdf/2302.05268}{arXiv:2302.05268v2 [hep-ph]}
+        \end{flushright}
+    \end{minipage}
+\end{frame}
 
 \begin{frame}
     \center
@@ -332,7 +351,7 @@ $$
     Usually, we want to constrian nuisance parameters, but in the frequentist language \textbf{everything is data}.
     % To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
     
-    \end{frame}
+\end{frame}
     
     % \begin{frame}{... everything is data}
     %     "\textit{The great advantage of the Bayesian approach is that it allows you to incorporate subjective beliefs, while the Frequentist approach pretends that you don't have any.}"
@@ -353,7 +372,7 @@ $$
     %     % https://indico.cern.ch/event/243641/attachments/415317/577061/CERN-Stat-Lectures.pdf
     % \end{frame}
     
-    \begin{frame}{Frequentist "priors"}
+\begin{frame}{Frequentist "priors"}
     Constrain nuisance parameters using \textit{auxiliary data} $a$,
     $$p(x| \theta, \nu) p(a| \nu)$$
     
@@ -364,23 +383,28 @@ $$
     Often \textit{auxiliary data} is \textit{created} to match our desired constraint term.
     \end{frame}
     
-    \begin{frame}{Bayesian nuisance parameters}
+\begin{frame}{Bayesian nuisance parameters}
     Priors can be defined using auxiliary data
     $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
     %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
     
     Only in the Bayesian case, other prior choices are also allowed, e.g.
-    $$ p(\nu) = \text{Gauss}(\nu | \nu_0, \sigma_\nu)$$
+    $$ p(\nu) = \mathcal{N}(\nu | \nu_0, \sigma_\nu^2)$$
     
     % Bayesian approach also requires priors for POIs.
-    \end{frame}
+\end{frame}
     
-    \begin{frame}{Bayesian updating}
+\begin{frame}{Bayesian updating}
+        \vspace{-0.5cm}
         Can generally use measurements to \textit{update} our posterior
         $$
         p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} p(\theta | x_1) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
         $$
-        Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
+        % Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.65\linewidth]{../plots/updating.pdf}
+        \end{figure}
 
         % A posterior based on all LHC data $x_{LHC}$
         % $$
@@ -391,15 +415,34 @@ $$
         % p(\theta | x_{LHC}, x_{HL}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} p(\theta | x_{LHC}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta).
         % $$
         % Parameter values $\theta$ under which data $x_{LHC}, x_{HL}$ is more probable on average get weighted up, other values get weighted down.
-    \end{frame}
-    
-    \begin{frame}{Bayesian updating}
-        % \vspace{-1cm}
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.9\linewidth]{../plots/updating.pdf}
-        \end{figure}
-    \end{frame}
+\end{frame}
+
+\begin{frame}{Bayesian updating in real life}
+        \vspace{-0.5cm}
+        PDFs for parameters are manifestly Bayesian.\\
+        Combinations of $\mu_i \pm \sigma_i$ assume an underlying PDF for $\mu_i$.
+        \begin{minipage}{0.44\textwidth}
+            \begin{align*}
+                \mathcal{R}(D) &= \frac{
+                    \mathcal{B}(\bar B \to D \tau^- \bar{\nu}_\tau)
+                }{
+                    \mathcal{B}(\bar B \to D l^- \bar{\nu}_l)
+                }\\
+                \mathcal{R}(D^*) &= \frac{
+                    \mathcal{B}(\bar B \to D^* \tau^- \bar{\nu}_\tau)
+                }{
+                    \mathcal{B}(\bar B \to D^* l^- \bar{\nu}_l)
+                }
+            \end{align*}
+        \end{minipage}
+        \begin{minipage}{0.55\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{../plots/rd_rdstar.pdf}
+            \end{figure}
+        \end{minipage}
+        \small Actual combinations a bit more involved, see \href{https://arxiv.org/pdf/2411.18639}{HFLAV 2024}.
+\end{frame}
 
 \begin{frame}{A simple linear model}
     \begin{figure}
@@ -428,7 +471,7 @@ $$
     \begin{itemize}
         \item Our independent data: $\boldsymbol{X} = (x_i, y_i, \sigma_i)$
         \item Our model:
-        $$ p(\boldsymbol{X}|\theta_0, \theta_1) = \prod_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\text{Gauss}(y_i | \mu(x_i|\theta_0, \theta_1), \sigma_i)$$
+        $$ p(\boldsymbol{X}|\theta_0, \theta_1) = \prod_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\mathcal{N}(y_i | \mu(x_i|\theta_0, \theta_1), \sigma_i^2)$$
         $$\mu(x_i|\theta_0, \theta_1) = \theta_0 + \theta_1 x_i$$
          \item[\arrow] We want to know about $\theta_0$, do not care about $\theta_1$.
     \end{itemize}
@@ -457,8 +500,7 @@ $$
     $$p(\theta_0, \theta_1|\boldsymbol{X}) \propto p(\boldsymbol{X}|\theta_0, \theta_1) p(\theta_0)p(\theta_1)$$
     \begin{minipage}{0.4\linewidth}
         $$p(\theta_0) = \text{Uniform}(0,2)$$
-        $$p(\theta_1) = \text{Gauss}(\theta_1 | t_1, \sigma_{t_1})$$
-        \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization.
+        $$p(\theta_1) = \mathcal{N}(\theta_1 | t_1, \sigma_{t_1}^2)$$
     \end{minipage}
     \begin{minipage}{0.59\linewidth}
     \begin{figure}
@@ -470,7 +512,7 @@ $$
 
 \begin{frame}{Marginal posterior}
 \vspace{-1cm}
-    $$p(\theta_0|\boldsymbol{X}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\boldsymbol{X}) = \text{Gauss}(\theta_0 | \theta_0^*, \sigma_{\theta_0})$$
+    $$p(\theta_0|\boldsymbol{X}) = \int d\theta_1 ~ p(\theta_0, \theta_1|\boldsymbol{X}) = \mathcal{N}(\theta_0 | \theta_0^*, \sigma_{\theta_0})$$
     \begin{minipage}{0.4\linewidth}
     In this example, we get
         \begin{itemize}
@@ -581,6 +623,50 @@ We loop
     \end{figure}
     \end{minipage}
     ... but one can become more fancy. %TODO reference
+\end{frame}
+
+\begin{frame}
+    \center
+    \Large
+    Model comparison
+\end{frame}
+
+\begin{frame}{Point-wise: P-values}
+    $$
+    P = \int_{\lambda_{obs}}^\infty d\lambda ~ p(\lambda) = 1 - CDF_{p}(\lambda_{obs}), \quad  \lambda = -2 \ln \frac{L(\boldsymbol{\eta} = 0, \hat{\hat{\boldsymbol{\chi}}})}{L(\hat{\boldsymbol{\eta}}, \hat{ \boldsymbol{\chi}})}
+    $$
+\end{frame}
+
+\begin{frame}{Averaged: Bayes factor}
+    \vspace{-0.5cm}
+        \begin{minipage}{0.74\textwidth}
+            Compare the probabilities of the observed data being produced by a given model.
+            \begin{align*}
+                p(\theta | x, M) &= \frac{p(x | \theta, M) ~ p(\theta | M)}{\textcolor{red}{p(x | M)}}\\
+                \textcolor{red}{p(x | M)} &= \int d^n \theta ~ p(x | \theta, M) ~ p(\theta | M)\\
+                B &= \frac{p(x | M_1)}{p(x| M_0)}
+            \end{align*}
+        \end{minipage}
+        \begin{minipage}{0.25\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{../plots/jeffreys-scale.png}
+                %https://www.researchgate.net/publication/341958289/figure/fig1/AS:902030868615168@1592072326255/JASP-classification-scheme-for-the-Bayes-factor-BF-10.png
+            \end{figure}
+        \end{minipage}
+    \end{frame}
+
+\begin{frame}{$b\to u l^- \bar \nu$ in the Weak Effective Theory}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{../plots/wet-bayes.png}
+    \end{figure}
+    $$
+    B = \exp(\ln Z(WET) - \ln Z (SM)) = 54.6
+    $$
+    \begin{flushright}
+        \href{https://arxiv.org/pdf/2302.05268}{arXiv:2302.05268v2 [hep-ph]}
+    \end{flushright}
 \end{frame}
 
 \begin{frame}{Tools to try}
