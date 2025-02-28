@@ -25,9 +25,9 @@ professionalfonts
 
 \DeclareMathOperator\supp{supp}
 
-\title[]{A Hidden Gem: \\ Unlocking the Power of Bayesian Inference in Particle Physics}
+\title[]{Illuminating the dark side of statistics: \\ Bayesian inference in particle physics}
 
-\author[L. G\"artner]{\underline{Lorenz G\"artner}$^{1}$, Toni Sculac, Judith Katzy }
+\author[L. G\"artner]{\underline{Lorenz G\"artner}$^{1}$}
 
 \institute[LMU]{$^1$LMU Munich}
 
@@ -99,7 +99,10 @@ $$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$
 \end{frame}
 
 \begin{frame}{Probability interpretations}
-    The probability axioms and rules allow you to calculate new probabilities from old ones.
+    Axioms:
+    \begin{center}
+        old probabilities \arrow new probabilities
+    \end{center}
     
     \vspace{0.5cm}
     To assign probabilities we need probability interpretations.
@@ -109,33 +112,55 @@ $$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$
 \end{frame}
 
 \begin{frame}{Frequentist interpretation}
-Assign a probability as relative frequency
-$$
-p(x) = \lim_{N\to\infty} \frac{N_x}{N}
-$$
+    Assign a probability as relative frequency
+    \begin{minipage}{0.60\textwidth}
+        $$
+        p(x) = \lim_{N\to\infty} \frac{N_x}{N}
+        $$
 
-\begin{itemize}
-    \item Can only be assigned to repeatable experiments
-    \item Not everything is repeatable...
-    \item No probabilities of single events
-\end{itemize}
+        \begin{itemize}
+            \item "The data is random."
+            \item Repeatable experiments only
+            \item $p(x)$ for $N=1$?
+        \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.39\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{../plots/die-title.png}
+            \includegraphics[width=\textwidth]{../plots/die-bike.png}
+            \includegraphics[width=\textwidth]{../plots/die-ski.png}
+            \includegraphics[width=\textwidth]{../plots/die-climbing.png}
+        \end{figure}
+        %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
+    \end{minipage}
 \end{frame}
 
 \begin{frame}{Bayesian interpretation}
-Assign a probability $p(x)$ as \textit{degree of belief}.
-
-\begin{itemize}
-    \item Probability depends on the experimenters' knowledge.
-    \item Inference results are subjective.
-    \item Everything is a random variable.
-\end{itemize}
+    Assign a probability $p(x)$ as \textit{degree of belief}.
+    \begin{itemize}
+        \item "Parameters are random".
+        % \item Probability depends on the experimenters' knowledge.
+        \item Inference results are subjective.
+    \end{itemize}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.4\textwidth]{../plots/die-title.png}\\
+            \includegraphics[width=0.4\textwidth]{../plots/die-climbing.png}
+        \end{figure}
+        $$p(death|experienced) \neq p(death|unexperienced)$$
+        %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
 \end{frame}
 
 \begin{frame}{Bayes' theorem}
 
 The \textbf{posterior} is
 
-$$p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{theory})}{p(\text{data})}$$
+$$
+\tcbhighmath[colback=yellow]{
+p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{theory})}{p(\text{data})}
+}
+$$
 
 \begin{itemize}
     \item \textbf{Likelihood} $p(\text{data}|\text{theory})$
@@ -147,12 +172,17 @@ $$p(\text{theory} | \text{data}) = \frac{p(\text{data}|\text{theory}) p(\text{th
 \end{flushright}
 \end{frame}
 
+\begin{frame}
+    \textit{ [...] nearly all physicists tend to misinterpret frequentist results as statements about the theory given with the data.}\\
+    \flushright Presentation of search results: the $CL_s$ technique,\\ A. L. Read
+\end{frame}
+
 \begin{frame}{The common ground}
     \textbf{Frequentist inference} is based on 
-    $$\textcolor{red}{p(x|\theta)}$$
+    $$\tcbhighmath[colback=yellow]{p(x|\theta)}$$
     \textbf{Bayesian inference} is based on
-    $$p(\theta | x) = \frac{\textcolor{red}{p(x|\theta)} p(\theta)}{p(x)}$$
-    \arrow You want the best possible $\textcolor{red}{p(x|\theta)}$.
+    $$p(\theta | x) = \frac{\tcbhighmath[colback=yellow]{p(x|\theta)} p(\theta)}{p(x)}$$
+    \arrow \textbf{You want the best possible $\tcbhighmath[colback=yellow]{p(x|\theta)}$.}
 \end{frame}
 
 \begin{frame}[noframenumbering]{The best possible model...}
@@ -187,16 +217,16 @@ Parameter inference
 \end{frame}
 
 \begin{frame}{Frequentist point estimates: estimators}
-    Estimator is a \textit{statistic} $\hat \theta(x)$, i.e. a well chosen function of the data with the desited properties of
+    Estimator is a \textit{statistic} $\hat \theta(x)$, with desired properties
     \begin{minipage}{0.65\textwidth}
         \begin{itemize}
-            \item \textit{consistency}\\
+            \item \textbf{consistency}\\
             $\lim_{n_x \to \infty} E_x[\hat \theta] = \theta_{true}$
             % converges toward true value as number of observations increase
-            \item \textit{unbiasedness}\\
+            \item \textbf{unbiasedness}\\
             $b = E_x[\hat \theta] - \theta_{true}$
             
-            \item \textit{efficiency}\\
+            \item \textbf{efficiency}\\
             $V(\hat \theta) = I(\theta)^{-1} = E_x\left[\left(\frac{\partial \ln p(x|\theta)}{\partial \theta}\right)^2\right]^{-1}$
             % minimum variance
             \item ...
@@ -220,14 +250,12 @@ Parameter inference
 \begin{frame}{Method of maximum likelihood}
     \vspace{-0.2cm}
     We find maximum likelihood estimators $ \hat \theta$ by solving
+    $$\hat \theta = \text{argmax}_\theta ~ p(x|\theta)$$
+    It has the property
     $$
-    \frac{\partial p(x|\theta)}{\partial \theta}\bigg\vert_{\theta = \hat \theta} = 0
+    \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right),
     $$
-    With the property
-    $$
-    \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right)
-    $$
-    This implies consistency, asymptotic unbiasedness and efficiency.
+    implying consistency, asymptotic unbiasedness and efficiency.
     % $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
 \end{frame}
 
@@ -257,6 +285,16 @@ Parameter inference
             \includegraphics[width=\linewidth]{../plots/map_vs_mean.pdf}
         \end{figure}
     \end{minipage}
+\end{frame}
+
+\begin{frame}{Bayesian point estimates}
+        \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
+            $$\theta^* = \text{argmax}_\theta ~ p(\theta|x)$$
+        \textit{Note}
+        $$\frac{\partial p(\theta|x)}{\partial \theta}\bigg\vert_{\theta = \theta^*} \propto 
+        \left(
+            \frac{\partial p(x|\theta)}{\partial \theta}p(\theta) + p(x|\theta) \frac{\partial p(\theta)}{\partial \theta}\right)\bigg\vert_{\theta = \theta^*} = 0$$
+        $$\implies \theta^* = \hat \theta \quad \textrm{if} \quad \frac{\partial p(\theta)}{\partial \theta}\bigg\vert_{\theta = \theta^*}=0$$
 \end{frame}
 
 \begin{frame}{Intervals and limits}
@@ -326,7 +364,7 @@ $$
             \item Identify modes, credible intervals
             \item Best fit point $\neq$ mode, why?
         \end{itemize}
-        \vspace{1cm}
+        \vspace{0.5cm}
         \begin{flushright}
             \href{https://arxiv.org/pdf/2302.05268}{arXiv:2302.05268v2 [hep-ph]}
         \end{flushright}
@@ -339,16 +377,31 @@ $$
     Nuisance parameters and priors
     \end{frame}
     
-    \begin{frame}{Frequentist nuisance parameters}
-    
-    Models are not perfect \arrow \textbf{systematic bias}
+    \begin{frame}{Nuisance parameters}
+
+        \begin{minipage}{0.49\textwidth}
+            Models are not perfect \\
+            \arrow \textbf{systematic bias}
+
+            \vspace{0.5cm}
+            \textit{Solution}: \\
+            \textbf{Nuisance} parameters $\nu$,
+            $$p(x|\psi, \nu)$$
+        \end{minipage}
+        \begin{minipage}{0.49\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{../plots/hubble.png}
+            \end{figure}
+            \flushright \small
+            \href{https://www.pnas.org/doi/10.1073/pnas.15.3.168}{Hubble 1929}
+        \end{minipage}
+    \vspace{0.5cm}
     % In general the model is not perfect, which is to say it cannot provide an accurate description of the data even at the most optimal point of its parameter space. As a result, the estimated parameters can have a systematic bias.
     
-    \textit{Solution}: Include additional \textbf{nuisance} parameters $\nu$,
-    $$p(x|\theta, \nu).$$
     % Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated.
     
-    Usually, we want to constrian nuisance parameters, but in the frequentist language \textbf{everything is data}.
+    Usually, we want to constrain nuisance parameters, but in the frequentist language \textbf{everything is data}.
     % To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
     
 \end{frame}
@@ -373,25 +426,48 @@ $$
     % \end{frame}
     
 \begin{frame}{Frequentist "priors"}
-    Constrain nuisance parameters using \textit{auxiliary data} $a$,
-    $$p(x| \theta, \nu) p(a| \nu)$$
-    
-    $p(a| \nu)$ represents our \textit{degree of belief} in $\nu$.
-    
-    \vspace{0.5cm}
-    
-    Often \textit{auxiliary data} is \textit{created} to match our desired constraint term.
+    \vspace{-0.5cm}
+    \begin{minipage}{0.7\textwidth}
+        Constrain nuisance parameters using \textit{auxiliary data} $a$,
+        $$p(x| \psi, \nu) p(a| \nu)$$
+        
+        $p(a| \nu)$ represents \textit{degree of belief} in $\nu$.
+        
+        \vspace{0.5cm}
+        
+        Often \textit{auxiliary data} is \textit{created} to match our desired constraint term.
+
+        \flushright \small
+        \href{https://arxiv.org/pdf/2311.14647}{Belle II 2024}
+    \end{minipage}
+    \begin{minipage}{0.29\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{../plots/knunu-offres.pdf}
+            \includegraphics[width=\textwidth]{../plots/knunu-signal.pdf}
+        \end{figure}
+    \end{minipage}
     \end{frame}
     
 \begin{frame}{Bayesian nuisance parameters}
-    Priors can be defined using auxiliary data
-    $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
-    %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
-    
-    Only in the Bayesian case, other prior choices are also allowed, e.g.
-    $$ p(\nu) = \mathcal{N}(\nu | \nu_0, \sigma_\nu^2)$$
-    
-    % Bayesian approach also requires priors for POIs.
+    \begin{minipage}{0.6\textwidth}
+        Priors can be defined using auxiliary data
+        $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
+        %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
+        
+        Only in the Bayesian case, other prior choices are also allowed, e.g.
+        $$ p(\nu) = \mathcal{N}(\nu | \nu_0, \sigma_\nu^2)$$
+        
+        % Bayesian approach also requires priors for POIs.
+    \end{minipage}
+    \begin{minipage}{0.39\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{../plots/straub-posterior.pdf}
+            \flushright \small
+        \href{https://arxiv.org/pdf/2311.14647}{Paul 2017}
+        \end{figure}
+    \end{minipage}
 \end{frame}
     
 \begin{frame}{Bayesian updating}
@@ -441,7 +517,7 @@ $$
                 \includegraphics[width=\textwidth]{../plots/rd_rdstar.pdf}
             \end{figure}
         \end{minipage}
-        \small Actual combinations a bit more involved, see \href{https://arxiv.org/pdf/2411.18639}{HFLAV 2024}.
+        \small Actual combinations a bit more involved \arrow \href{https://arxiv.org/pdf/2411.18639}{HFLAV 2024}.
 \end{frame}
 
 \begin{frame}{A simple linear model}
@@ -546,7 +622,7 @@ MCMC
     \item Remove nuisance parameters by integrating over $\nu$.
     \item[\arrow] The \textit{marginal posterior} is
         $$
-        p(\theta | x) = \int d\nu ~ p(\theta, \nu | x)
+        p(\theta | x) = \int d\nu ~ p(\psi, \nu | x)
         $$
     \item Commonly a high dimensional integral\\ \arrow compute with Monte Carlo methods.
 \end{itemize}
@@ -632,9 +708,16 @@ We loop
 \end{frame}
 
 \begin{frame}{Point-wise: P-values}
+    \vspace{-1cm}
     $$
-    P = \int_{\lambda_{obs}}^\infty d\lambda ~ p(\lambda) = 1 - CDF_{p}(\lambda_{obs}), \quad  \lambda = -2 \ln \frac{L(\boldsymbol{\eta} = 0, \hat{\hat{\boldsymbol{\chi}}})}{L(\hat{\boldsymbol{\eta}}, \hat{ \boldsymbol{\chi}})}
+    P(\lambda_{obs}|M_0) = \int_{\lambda_{obs}}^\infty d\lambda ~ p(\lambda|M_0), \quad  \lambda = -2 \ln \frac{p(x|\theta, M_0)}{p(x|\theta, M_1)} ~^\dagger
     $$
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.65\textwidth]{../plots/hypo.pdf}
+    \end{figure}
+    \small
+    $^\dagger$ Likelihood ratio = optimal test statistic \arrow Newman-Pearson lemma
 \end{frame}
 
 \begin{frame}{Averaged: Bayes factor}
