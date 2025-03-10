@@ -55,13 +55,15 @@ professionalfonts
         \begin{itemize}
             \item BSc @ University of Manchester \\
                 Physics with theoretical physics\\
-                Little stats
             \item MSc @ LMU Munich \\
-                Thesis on QFT in curved spacetime\\
-                Almost no stats
+                More theory \ldots
+        \end{itemize}
+        $---$ almost no stats $---$
+        \begin{itemize}
             \item Currenly PhD @ LMU Munich\\
                 A lot of stats
         \end{itemize}
+        \arrow Never too late to start
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
         \begin{figure}
@@ -79,6 +81,10 @@ What is a probability?
 
 \begin{frame}{Kolmogorov probability axioms}
 % https://plato.stanford.edu/entries/probability-interpret/#MaiInt
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../plots/kolmogorov.jpg}
+\end{figure}
 \begin{enumerate}
   \item $ p(\Omega) = 1 $, where \( \Omega \) is the sample space.
   \item $ p(x) \geq 0 $ for any event \( x \subseteq \Omega \).
@@ -87,6 +93,7 @@ What is a probability?
         p\left( \bigcup_{i=1} x_i \right) = \sum_{i=1} p(x_i)
         $$
 \end{enumerate}
+%https://www.urbanomic.com/document/concept-intuition-abstract-probability-theory/kolmogorov/
 \end{frame}
 
 
@@ -113,43 +120,54 @@ $$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$
 
 \begin{frame}{Frequentist interpretation}
     Assign a probability as relative frequency
-    \begin{minipage}{0.60\textwidth}
-        $$
+    % \begin{minipage}{0.60\textwidth}
+
+        $$ \color{blue}
         p(x) = \lim_{N\to\infty} \frac{N_x}{N}
         $$
 
         \begin{itemize}
             \item "The data is random."
-            \item Repeatable experiments only
-            \item $p(x)$ for $N=1$?
+            \item For repeatable experiments only.
+            \item No probabilities for single events.
         \end{itemize}
-    \end{minipage}
-    \begin{minipage}{0.39\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=\textwidth]{../plots/die-title.png}
-            \includegraphics[width=\textwidth]{../plots/die-bike.png}
-            \includegraphics[width=\textwidth]{../plots/die-ski.png}
-            \includegraphics[width=\textwidth]{../plots/die-climbing.png}
-        \end{figure}
-        %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
-    \end{minipage}
+    % \end{minipage}
+    % \begin{minipage}{0.39\textwidth}
+    %     \begin{figure}
+    %         \centering
+    %         \includegraphics[width=\textwidth]{../plots/die-title.png}
+    %         \includegraphics[width=\textwidth]{../plots/die-bike.png}
+    %         \includegraphics[width=\textwidth]{../plots/die-ski.png}
+    %         \includegraphics[width=\textwidth]{../plots/die-climbing.png}
+    %     \end{figure}
+    %     %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
+    % \end{minipage}
 \end{frame}
 
 \begin{frame}{Bayesian interpretation}
-    Assign a probability $p(x)$ as \textit{degree of belief}.
+    Assign a probability $\color{blue} p(x)$ as \textit{degree of belief}.
     \begin{itemize}
-        \item "Parameters are random".
-        % \item Probability depends on the experimenters' knowledge.
+        \item "Parameters are random."
         \item Inference results are subjective.
     \end{itemize}
+    \begin{minipage}{0.49\textwidth}
+
+        \large \color{blue}
+        $$p(SM|data) ~~?$$
+        
+        \vspace{1cm}
+
+        \small \flushright
+        \href{https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PUBNOTES/ATL-PHYS-PUB-2024-011/fig_03a.png}{ATLAS}
+    \end{minipage}
+    \begin{minipage}{0.50\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[width=0.4\textwidth]{../plots/die-title.png}\\
-            \includegraphics[width=0.4\textwidth]{../plots/die-climbing.png}
+            \includegraphics[width=\textwidth]{../plots/sm_pred.png}
         \end{figure}
-        $$p(death|experienced) \neq p(death|unexperienced)$$
-        %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
+    \end{minipage}
+    % $$p(death|experienced) \neq p(death|unexperienced)$$
+    % %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
 \end{frame}
 
 \begin{frame}{Bayes' theorem}
@@ -165,7 +183,7 @@ $$
 \begin{itemize}
     \item \textbf{Likelihood} $p(\text{data}|\text{theory})$
     \item \textbf{Prior} $p(\text{theory})$
-    \item \textbf{Evidence} $p(\text{data}) = \int p(\text{data}|\text{theory}) p(\text{theory})$
+    \item \textbf{Marginal likelihood} ${p(\text{data}) = \int p(\text{data}|\text{theory}) p(\text{theory})}$
 \end{itemize}
 \begin{flushright}
     \textit{Can you derive it?}
@@ -182,17 +200,23 @@ $$
     $$\tcbhighmath[colback=yellow]{p(x|\theta)}$$
     \textbf{Bayesian inference} is based on
     $$p(\theta | x) = \frac{\tcbhighmath[colback=yellow]{p(x|\theta)} p(\theta)}{p(x)}$$
-    \arrow \textbf{You want the best possible $\tcbhighmath[colback=yellow]{p(x|\theta)}$.}
+    \centering
+    \Large
+    \textbf{You want the best possible $\tcbhighmath[colback=yellow]{p(x|\theta)}$!}
 \end{frame}
 
 \begin{frame}[noframenumbering]{The best possible model...}
     \begin{figure}
-        \includegraphics[width=0.4\textwidth]{../plots/sample_size.jpg}
+        \includegraphics[width=0.5\textwidth]{../plots/sample_size.jpg}
     \end{figure}
 \end{frame}
 
 \begin{frame}{Physics does not care...}{... about our interpretation}
-For many inference problems, the frequentist and Bayesian approaches give similar numerical values, even though they answer different questions.
+For many inference problems, 
+$$\color{blue}
+\text{results} \mid \text{frequentist} \approx \text{results} \mid \text{Bayesian},
+$$
+even though they answer different questions.
 
 \vspace{0.5cm}
 
@@ -221,13 +245,22 @@ Parameter inference
     \begin{minipage}{0.65\textwidth}
         \begin{itemize}
             \item \textbf{consistency}\\
-            $\lim_{n_x \to \infty} E_x[\hat \theta] = \theta_{true}$
+            $
+            \color{blue}
+            \lim_{N_x \to \infty} E_x[\hat \theta] = \theta_{true}
+            $
             % converges toward true value as number of observations increase
             \item \textbf{unbiasedness}\\
-            $b = E_x[\hat \theta] - \theta_{true}$
+            $
+            \color{blue}
+            b = E_x[\hat \theta] - \theta_{true}
+            $
             
             \item \textbf{efficiency}\\
-            $V(\hat \theta) = I(\theta)^{-1} = E_x\left[\left(\frac{\partial \ln p(x|\theta)}{\partial \theta}\right)^2\right]^{-1}$
+            $
+            \color{blue}
+            V(\hat \theta) = I(\theta)^{-1} = E_x\left[\left(\frac{\partial \ln p(x|\theta)}{\partial \theta}\right)^2\right]^{-1}
+            $
             % minimum variance
             \item ...
         \end{itemize}
@@ -250,7 +283,11 @@ Parameter inference
 \begin{frame}{Method of maximum likelihood}
     \vspace{-0.2cm}
     We find maximum likelihood estimators $ \hat \theta$ by solving
-    $$\hat \theta = \text{argmax}_\theta ~ p(x|\theta)$$
+    $$
+    \tcbhighmath[colback=yellow]{
+        \hat \theta = \text{argmax}_\theta ~ p(x|\theta)
+    }
+    $$
     It has the property
     $$
     \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right),
@@ -275,9 +312,17 @@ Parameter inference
 \begin{frame}{Bayesian point estimates}
     \begin{minipage}{0.49\textwidth}
         \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
-            $$\theta^* = \text{argmax}_\theta ~ p(\theta|x)$$
+            $$
+            \tcbhighmath[colback=yellow]{
+            \theta^* = \text{argmax}_\theta ~ p(\theta|x)
+            }
+            $$
         \textbf{Mean}\\ Expected value of $\theta$ under the posterior
-            $$ \bar{\theta} = E_{p(\theta|x)}[\theta]$$
+            $$
+            \tcbhighmath[colback=yellow]{ 
+            \bar{\theta} = E_{p(\theta|x)}[\theta]
+            }
+            $$
     \end{minipage}
     \begin{minipage}{0.49\textwidth}
         \begin{figure}
@@ -291,10 +336,10 @@ Parameter inference
         \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
             $$\theta^* = \text{argmax}_\theta ~ p(\theta|x)$$
         \textit{Note}
-        $$\frac{\partial p(\theta|x)}{\partial \theta}\bigg\vert_{\theta = \theta^*} \propto 
+        $$0=\frac{\partial p(\theta|x)}{\partial \theta}\bigg\vert_{\theta = \theta^*} \propto 
         \left(
-            \frac{\partial p(x|\theta)}{\partial \theta}p(\theta) + p(x|\theta) \frac{\partial p(\theta)}{\partial \theta}\right)\bigg\vert_{\theta = \theta^*} = 0$$
-        $$\implies \theta^* = \hat \theta \quad \textrm{if} \quad \frac{\partial p(\theta)}{\partial \theta}\bigg\vert_{\theta = \theta^*}=0$$
+            \frac{\partial p(x|\theta)}{\partial \theta}p(\theta) + p(x|\theta) \frac{\partial p(\theta)}{\partial \theta}\right)\bigg\vert_{\theta = \theta^*}$$
+        $$\implies \theta^* = \hat \theta \quad {\rm if} \quad \frac{\partial p(\theta)}{\partial \theta}\bigg\vert_{\theta = \theta^*}=0$$
 \end{frame}
 
 \begin{frame}{Intervals and limits}
@@ -319,7 +364,9 @@ If an estimator PDF is not Normal, $\hat \theta \pm \sigma_\theta$ is meaningles
 \begin{minipage}[t]{0.55\linewidth}
 \textbf{Neyman confidence belt}
 $$
+\tcbhighmath[colback=yellow]{
 \int_{x_1}^{x_2} dx ~ p(x|\theta) = 1-\alpha
+}
 $$
 Not unique \arrow \textit{central interval}
 \small
@@ -341,7 +388,9 @@ or \textit{upper/lower interval}
 
 Credible intervals $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
 $$
+\tcbhighmath[colback=yellow]{
 \int_{\theta_1}^{\theta_2} d\theta ~ p(\theta| x) = 1-\alpha
+}
 $$
 \begin{itemize}
     \item For upper/lower limits: set $\theta_1$ or $\theta_2$ to boundary
@@ -360,9 +409,8 @@ $$
     \begin{minipage}{0.49\textwidth}
         \begin{itemize}
             \item \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization.
-            \item Marginal posterior for Wilson coefficients
+            \item Posterior for Wilson coefficients
             \item Identify modes, credible intervals
-            \item Best fit point $\neq$ mode, why?
         \end{itemize}
         \vspace{0.5cm}
         \begin{flushright}
@@ -455,7 +503,7 @@ $$
         $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
         %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
         
-        Only in the Bayesian case, other prior choices are also allowed, e.g.
+        Only in the Bayesian case, other prior choices are also allowed
         $$ p(\nu) = \mathcal{N}(\nu | \nu_0, \sigma_\nu^2)$$
         
         % Bayesian approach also requires priors for POIs.
@@ -496,7 +544,7 @@ $$
 \begin{frame}{Bayesian updating in real life}
         \vspace{-0.5cm}
         PDFs for parameters are manifestly Bayesian.\\
-        Combinations of $\mu_i \pm \sigma_i$ assume an underlying PDF for $\mu_i$.
+        Combinations of $\mu \pm \sigma$ assume an underlying PDF for $\mu$.
         \begin{minipage}{0.44\textwidth}
             \begin{align*}
                 \mathcal{R}(D) &= \frac{
@@ -618,11 +666,11 @@ MCMC
 
 \begin{frame}{The hard part ...}
 \begin{itemize}
-    \item We only want the posterior for $\theta$ alone.
+    \item We only want the posterior for $\psi$ alone.
     \item Remove nuisance parameters by integrating over $\nu$.
     \item[\arrow] The \textit{marginal posterior} is
         $$
-        p(\theta | x) = \int d\nu ~ p(\psi, \nu | x)
+        p(\psi | x) = \int d\nu ~ p(\psi, \nu | x)
         $$
     \item Commonly a high dimensional integral\\ \arrow compute with Monte Carlo methods.
 \end{itemize}
@@ -729,6 +777,7 @@ We loop
                 \textcolor{red}{p(x | M)} &= \int d^n \theta ~ p(x | \theta, M) ~ p(\theta | M)\\
                 B &= \frac{p(x | M_1)}{p(x| M_0)}
             \end{align*}
+            \textit{Do you see a potential hazard?}
         \end{minipage}
         \begin{minipage}{0.25\textwidth}
             \begin{figure}
