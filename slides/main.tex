@@ -97,13 +97,13 @@ What is a probability?
 \end{frame}
 
 
-\begin{frame}{Conditional probability}
-Is \textbf{defined} as the probability of an event $x$ if we know that an event $y$ is true $p(x|y)$.
-$$p(x \cap y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cap y)}{p(y)}$$
+% \begin{frame}{Conditional probability}
+% Is \textbf{defined} as the probability of an event $x$ if we know that an event $y$ is true $p(x|y)$.
+% $$p(x \cap y) = p(x|y)p(y) \quad \to \quad p(x|y) = \frac{p(x \cap y)}{p(y)}$$
 
-\textit{Note} 
-$$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$ 
-\end{frame}
+% \textit{Note} 
+% $$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$ 
+% \end{frame}
 
 \begin{frame}{Probability interpretations}
     Axioms:
@@ -150,22 +150,6 @@ $$p(x \cap y) = p(y \cap x) \quad  \text{but} \quad p(x|y) \neq p(x|y)$$
         \item "Parameters are random."
         \item Inference results are subjective.
     \end{itemize}
-    \begin{minipage}{0.49\textwidth}
-
-        \large \color{blue}
-        $$p(SM|data) ~~?$$
-        
-        \vspace{1cm}
-
-        \small \flushright
-        \href{https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PUBNOTES/ATL-PHYS-PUB-2024-011/fig_03a.png}{ATLAS}
-    \end{minipage}
-    \begin{minipage}{0.50\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=\textwidth]{../plots/sm_pred.png}
-        \end{figure}
-    \end{minipage}
     % $$p(death|experienced) \neq p(death|unexperienced)$$
     % %https://chessintheair.com/the-risk-of-dying-doing-what-we-love/
 \end{frame}
@@ -195,6 +179,73 @@ $$
     \flushright Presentation of search results: the $CL_s$ technique,\\ A. L. Read
 \end{frame}
 
+\begin{frame}{Bayesian beliefs}
+    \begin{minipage}{0.44\textwidth}
+        $$\color{blue} p(SM|data)$$
+        $$\color{blue} p(Higgs|data)$$
+        $$\color{blue} p(SUSY|data)$$
+    \end{minipage}
+    \onslide<2>
+    \begin{minipage}{0.55\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{../plots/sm_pred.png}
+        \end{figure}
+        \small \flushright
+        \href{https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PUBNOTES/ATL-PHYS-PUB-2024-011/fig_03a.png}{ATLAS}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Bayesian updating}
+    \vspace{-0.5cm}
+    Can generally use measurements to \textit{update} our posterior
+    $$
+    p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} p(\theta | x_1) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
+    $$
+    % Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.65\linewidth]{../plots/updating.pdf}
+    \end{figure}
+
+    % A posterior based on all LHC data $x_{LHC}$
+    % $$
+    % p(\theta | x_{LHC}) = \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta)
+    % $$
+    % can be updated with LHC-HL data $x_{HL}$, with $p(\theta | x_{LHC})$ as a prior
+    % $$
+    % p(\theta | x_{LHC}, x_{HL}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} p(\theta | x_{LHC}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta).
+    % $$
+    % Parameter values $\theta$ under which data $x_{LHC}, x_{HL}$ is more probable on average get weighted up, other values get weighted down.
+\end{frame}
+
+\begin{frame}{Bayesian updating in real life}
+    \vspace{-0.5cm}
+    PDFs for parameters are manifestly Bayesian.\\
+    Combinations of $\mu \pm \sigma$ assume an underlying PDF for $\mu$.
+    \begin{minipage}{0.44\textwidth}
+        \begin{align*}
+            \mathcal{R}(D) &= \frac{
+                \mathcal{B}(\bar B \to D \tau^- \bar{\nu}_\tau)
+            }{
+                \mathcal{B}(\bar B \to D l^- \bar{\nu}_l)
+            }\\
+            \mathcal{R}(D^*) &= \frac{
+                \mathcal{B}(\bar B \to D^* \tau^- \bar{\nu}_\tau)
+            }{
+                \mathcal{B}(\bar B \to D^* l^- \bar{\nu}_l)
+            }
+        \end{align*}
+    \end{minipage}
+    \begin{minipage}{0.55\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{../plots/rd_rdstar.pdf}
+        \end{figure}
+    \end{minipage}
+    \small Actual combinations a bit more involved \arrow \href{https://arxiv.org/pdf/2411.18639}{HFLAV 2024}.
+\end{frame}
+
 \begin{frame}{The common ground}
     \textbf{Frequentist inference} is based on 
     $$\tcbhighmath[colback=yellow]{p(x|\theta)}$$
@@ -220,7 +271,7 @@ even though they answer different questions.
 
 \vspace{0.5cm}
 
-BUT if results are different, you should understand why.
+% BUT if results are different, you should understand why.
 \end{frame}
 
 \begin{frame}
@@ -491,8 +542,8 @@ $$
     \begin{minipage}{0.29\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[width=\textwidth]{../plots/knunu-offres.pdf}
             \includegraphics[width=\textwidth]{../plots/knunu-signal.pdf}
+            \includegraphics[width=\textwidth]{../plots/knunu-offres.pdf}
         \end{figure}
     \end{minipage}
     \end{frame}
@@ -516,56 +567,6 @@ $$
         \href{https://arxiv.org/pdf/2311.14647}{Paul 2017}
         \end{figure}
     \end{minipage}
-\end{frame}
-    
-\begin{frame}{Bayesian updating}
-        \vspace{-0.5cm}
-        Can generally use measurements to \textit{update} our posterior
-        $$
-        p(\theta | x_1, x_2) = \frac{p(x_2|\theta)}{p(x_2)} p(\theta | x_1) = \frac{p(x_2|\theta)}{p(x_2)} \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
-        $$
-        % Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.65\linewidth]{../plots/updating.pdf}
-        \end{figure}
-
-        % A posterior based on all LHC data $x_{LHC}$
-        % $$
-        % p(\theta | x_{LHC}) = \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta)
-        % $$
-        % can be updated with LHC-HL data $x_{HL}$, with $p(\theta | x_{LHC})$ as a prior
-        % $$
-        % p(\theta | x_{LHC}, x_{HL}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} p(\theta | x_{LHC}) = \frac{p(x_{HL}|\theta)}{p(x_{HL})} \frac{p(x_{LHC}|\theta)}{p(x_{LHC})} p(\theta).
-        % $$
-        % Parameter values $\theta$ under which data $x_{LHC}, x_{HL}$ is more probable on average get weighted up, other values get weighted down.
-\end{frame}
-
-\begin{frame}{Bayesian updating in real life}
-        \vspace{-0.5cm}
-        PDFs for parameters are manifestly Bayesian.\\
-        Combinations of $\mu \pm \sigma$ assume an underlying PDF for $\mu$.
-        \begin{minipage}{0.44\textwidth}
-            \begin{align*}
-                \mathcal{R}(D) &= \frac{
-                    \mathcal{B}(\bar B \to D \tau^- \bar{\nu}_\tau)
-                }{
-                    \mathcal{B}(\bar B \to D l^- \bar{\nu}_l)
-                }\\
-                \mathcal{R}(D^*) &= \frac{
-                    \mathcal{B}(\bar B \to D^* \tau^- \bar{\nu}_\tau)
-                }{
-                    \mathcal{B}(\bar B \to D^* l^- \bar{\nu}_l)
-                }
-            \end{align*}
-        \end{minipage}
-        \begin{minipage}{0.55\textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[width=\textwidth]{../plots/rd_rdstar.pdf}
-            \end{figure}
-        \end{minipage}
-        \small Actual combinations a bit more involved \arrow \href{https://arxiv.org/pdf/2411.18639}{HFLAV 2024}.
 \end{frame}
 
 \begin{frame}{A simple linear model}
@@ -758,7 +759,7 @@ We loop
 \begin{frame}{Point-wise: P-values}
     \vspace{-1cm}
     $$
-    P(\lambda_{obs}|M_0) = \int_{\lambda_{obs}}^\infty d\lambda ~ p(\lambda|M_0), \quad  \lambda = -2 \ln \frac{p(x|\theta, M_0)}{p(x|\theta, M_1)} ~^\dagger
+    P(\lambda_{obs}|M_0) = \int_{\lambda_{obs}}^\infty d\lambda ~ p(\lambda|M_0), \quad  \lambda = -2 \ln \frac{p(x|\hat \theta, M_0)}{p(x|\hat \theta, M_1)} ~^\dagger
     $$
     \begin{figure}
         \centering
