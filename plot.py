@@ -40,7 +40,8 @@ def plot_2d_pdf_contour(
     plt.ylabel(y_label)
     if title:
         plt.title(title)
-    plt.colorbar(label=r'$N^2\sigma$')
+    c = plt.colorbar(label=r'$N^2\sigma$')
+    c.set_ticklabels([1,4,9,16])
     plt.legend()
     if file:
         Path(file).parent.mkdir(parents=True, exist_ok=True)
