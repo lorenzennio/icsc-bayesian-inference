@@ -31,9 +31,9 @@ where $m_s=125~\mathrm{GeV}$ and $\sigma_s=2~\mathrm{GeV}$. You expect $10000$ b
 
 \textit{Hint: Always work with twice negative logarithmic probabilities throughout the exercise.}
 \begin{enumerate}
-    \item Generate MC events for signal and background and load the data. %provide this
+    \item Generate MC events for signal and background and load the \href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/LHC_data.txt}{data}. %provide this
 
-    \item Construct the negative log-likelihood function
+    \item Construct a binned negative log-likelihood function
     $$p(n|\mu, \mu_{bkg}) = \prod_{\mathrm{bins}~b} \mathrm{Poisson}(n_b|\nu_b(\mu, \mu_{bkg}))$$
     where $n_b$ are your measured data yields per bin $b$. The expected yields per bin are
     $$\nu_b(\mu, \mu_{bkg}) = \mu n_{sig,b} + \mu_{bkg} n_{bkg, b},$$
