@@ -29,9 +29,9 @@ professionalfonts
 
 \title[]{Illuminating the dark side of statistics: \\ Bayesian inference in particle physics}
 
-\author[L. G\"artner]{\underline{Lorenz G\"artner}$^{1}$}
+\author[L. G\"artner]{\underline{Lorenz G\"artner}}
 
-\institute[LMU]{$^1$LMU Munich}
+\institute[LMU]{LMU Munich}
 
 \date{\today}
 
@@ -52,6 +52,18 @@ professionalfonts
     \end{tikzpicture}
 \end{frame}
 
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}<article:0>
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+                \includegraphics[keepaspectratio,
+                                 width=\paperwidth]{../plots/bridge.jpg}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
 \begin{frame}{About me}
     \begin{minipage}{0.69\textwidth}
         \begin{itemize}
@@ -60,7 +72,9 @@ professionalfonts
             \item MSc @ LMU Munich \\
                 More theory \ldots
         \end{itemize}
-        $---$ almost no stats $---$
+        \begin{center}
+            $---$ almost no stats $---$
+        \end{center}
         \begin{itemize}
             \item Currenly PhD @ LMU Munich\\
                 A lot of stats
@@ -347,7 +361,7 @@ Parameter inference
 
 \begin{frame}{Method of maximum likelihood}
     \vspace{-0.2cm}
-    We find maximum likelihood estimators $ \hat \theta$ by solving
+    Maximum likelihood estimators $ \hat \theta$ by solving
     $$
     \tcbhighmath[colback=yellow]{
         \hat \theta = \text{argmax}_\theta ~ p(x|\theta)
@@ -526,7 +540,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     
     % Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated.
     
-    Generally want to constrain nuisance parameters.
+    Generally, want to \textbf{constrain} nuisance parameters.
     % To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
     
 \end{frame}
@@ -557,7 +571,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
             Frequentist: \textbf{everything is data}
         \end{center}
 
-        Constrain with \textit{auxiliary data} $a$,
+        Constrain $\nu$ with \textit{auxiliary data} $a$,
         $$p(x| \psi, \nu) p(a| \nu).$$
         
         \onslide<2->
@@ -631,7 +645,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
         \item[\arrow] Model = product of normal distributions:
         $$ p(\boldsymbol{X}|\alpha, \beta) = \prod_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\mathcal{N}(y_i | \mu(x_i|\alpha, \beta), \sigma_i^2)$$
         $$\mu(x_i|\alpha, \beta) = \alpha + \beta x_i$$
-         \item We want to know about $\alpha$, do not care about $\beta$.
+         \item Care about $\psi = \alpha$, not $\nu=\beta$.
     \end{itemize}
 \end{frame}
 
@@ -644,9 +658,9 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     \end{figure}
 \end{frame}
 
-\begin{frame}{Including a measurement of $\beta$: $t, \sigma_{t}$}
+\begin{frame}{Including a measurement of $\beta$: $b, \sigma_{b}$}
 \vspace{-1cm}
-    $$ -2\log p(\boldsymbol{X}|\alpha, \beta) = \sum_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\frac{\left(y_i -\mu(x_i|\alpha, \beta)\right)^2}{\sigma_i^2} \color{red} + \frac{\left(\beta -t\right)^2}{\sigma_{t}^2} $$
+    $$ -2\log p(\boldsymbol{X}|\alpha, \beta) = \sum_{x_i, y_i,\sigma_i \in \boldsymbol{X}}\frac{\left(y_i -\mu(x_i|\alpha, \beta)\right)^2}{\sigma_i^2} \color{red} + \frac{\left(\beta -b\right)^2}{\sigma_{b}^2} $$
     \begin{minipage}{0.49\textwidth}
         \begin{figure}
             \centering
@@ -657,7 +671,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     \begin{minipage}{0.49\textwidth}
         \begin{figure}
             \centering
-            constrained
+            \color{red}constrained
             \includegraphics[width=0.9\linewidth]{../plots/nll_constr.pdf}
         \end{figure}
     \end{minipage}
@@ -669,7 +683,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     $$p(\alpha, \beta|\boldsymbol{X}) \propto p(\boldsymbol{X}|\alpha, \beta) p(\alpha)p(\beta)$$
     \begin{minipage}{0.4\linewidth}
         $$p(\alpha) = \text{Uniform}(0,2)$$
-        $$p(\beta) = \mathcal{N}(\beta | t_1, \sigma_{t_1}^2)$$
+        $$p(\beta) = \mathcal{N}(\beta | b, \sigma_{b}^2)$$
     \end{minipage}
     \begin{minipage}{0.59\linewidth}
     \begin{figure}
