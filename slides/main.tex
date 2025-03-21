@@ -115,6 +115,7 @@ What is a probability?
     
     \vspace{0.5cm}
     How do we assign probabilities in the first place? \\
+    \onslide<2->
     \arrow Need probability interpretations.
 
     \vspace{0.5cm}
@@ -172,9 +173,6 @@ $$
     \item \textbf{Prior} $p(\text{theory})$
     \item \textbf{Marginal likelihood} ${p(\text{data}) = \int p(\text{data}|\text{theory}) p(\text{theory})}$
 \end{itemize}
-\begin{flushright}
-    \textit{Can you derive it?}
-\end{flushright}
 \end{frame}
 
 \begin{frame}
@@ -355,11 +353,12 @@ Parameter inference
         \hat \theta = \text{argmax}_\theta ~ p(x|\theta)
     }
     $$
-    It has the property
+    \onslide<2->
+    Asymptotically,
     $$
     \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right),
     $$
-    implying consistency, asymptotic unbiasedness and efficiency.
+    \arrow consistency, asymptotic unbiasedness and efficiency
     % $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
 \end{frame}
 
@@ -378,7 +377,7 @@ Parameter inference
 
 \begin{frame}{Bayesian point estimates}
     \begin{minipage}{0.49\textwidth}
-        \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
+        \textbf{Mode}\\ Value of $\theta$ with maximum posterior probability
             $$
             \tcbhighmath[colback=yellow]{
             \theta^* = \text{argmax}_\theta ~ p(\theta|x)
@@ -399,9 +398,7 @@ Parameter inference
     \end{minipage}
 \end{frame}
 
-\begin{frame}{Bayesian point estimates}
-        \textbf{Mode}\\ Value of $\theta$ with maximum a-posteriori probability
-            $$\theta^* = \text{argmax}_\theta ~ p(\theta|x)$$
+\begin{frame}{Mode vs. ML estimator}
         Stationary point of the posterior at $\theta^*$:
         $$0=\frac{\partial p(\theta|x)}{\partial \theta}\bigg\vert_{\theta = \theta^*} \propto 
         \left(
@@ -448,7 +445,9 @@ or \textit{upper/lower interval}
 \begin{minipage}[t]{0.44\linewidth}
     \begin{figure}
         \centering
+        \href{https://images.app.goo.gl/mSGttC2DUfsXm2RN8}{
         \includegraphics[width=\linewidth]{../plots/neyman.png}
+        }
     \end{figure}
 \end{minipage}
 \end{frame}
@@ -485,9 +484,9 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     \end{minipage}
     \begin{minipage}{0.49\textwidth}
         \begin{itemize}
-            \item \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization.
+            \item \href{https://corner.readthedocs.io/en/latest/}{Corner plots} are great for visualization
             \item Posterior for Wilson coefficients
-            \item Identify modes, credible intervals
+            \item[\arrow] Modes, credible intervals, \ldots
         \end{itemize}
         \vspace{0.5cm}
         \begin{flushright}
@@ -527,7 +526,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     
     % Although including additional parameters may eliminate or at least reduce the effect of systematic uncertainties, their presence will result in increased statistical uncertainties for the parameters of interest. This occurs because the estimators for the nuisance parameters and those of interest will in general be correlated.
     
-    Usually, we want to constrain nuisance parameters, but in the frequentist language \textbf{everything is data}.
+    Generally want to constrain nuisance parameters.
     % To reduce the impact of the nuisance parameters one often tries to constrain their values by means of control or calibration measurements, say, having data y.
     
 \end{frame}
@@ -554,10 +553,15 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
 \begin{frame}{Frequentist "priors"}
     \vspace{-0.5cm}
     \begin{minipage}{0.7\textwidth}
-        Constrain nuisance parameters using \textit{auxiliary data} $a$,
-        $$p(x| \psi, \nu) p(a| \nu)$$
+        \begin{center}
+            Frequentist: \textbf{everything is data}
+        \end{center}
+
+        Constrain with \textit{auxiliary data} $a$,
+        $$p(x| \psi, \nu) p(a| \nu).$$
         
-        Often \textit{auxiliary data} is \textit{created} to match our desired constraint term.
+        \onslide<2->
+        Often: \textbf{create} \textit{auxiliary data} to match our desired constraint term.
 
         \vspace{0.5cm}
 
@@ -577,11 +581,11 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     
 \begin{frame}{Bayesian nuisance parameters}
     \begin{minipage}{0.6\textwidth}
-        Priors can be defined using auxiliary data
+        Priors from auxiliary data
         $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
         %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
         
-        Only in the Bayesian case, other prior choices are also allowed
+        Only in Bayesian:\\ other prior choices allowed
         $$ p(\nu) = \mathcal{N}(\nu | \nu_0, \sigma_\nu^2)$$
         
         % Bayesian approach also requires priors for POIs.
@@ -599,7 +603,9 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
 \begin{frame}{A simple linear model}
     \begin{figure}
         \centering
+        \href{https://xkcd.com/}{
         \includegraphics[width=0.8\linewidth]{../plots/change_in_slope_2x.png}
+        }
     \end{figure}
     % https://www.explainxkcd.com/wiki/images/9/9d/change_in_slope_2x.png
 \end{frame}
@@ -698,15 +704,18 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
 \end{frame}
 
 \begin{frame}{How do we marginalize?}
-    \begin{itemize}
-        \item We only want the posterior for $\psi$ alone.
-        \item Remove nuisance parameters by integrating over $\nu$.
-        \item[\arrow] The \textit{marginal posterior} is
-            $$
-            p(\psi | x) = \int d\nu ~ p(\psi, \nu | x)
-            $$
-        \item Commonly a high dimensional integral\\ \arrow compute with Monte Carlo methods.
-    \end{itemize}
+    \begin{center}
+        Interested in $p(\psi | x)$ and not $p(\psi, \nu | x)$.
+    \end{center}
+
+    \arrow \textbf{Marginal posterior}
+    $$
+    p(\psi | x) = \int d\nu ~ p(\psi, \nu | x)
+    $$
+    Commonly a high dimensional integral 
+    \begin{center}
+        \arrow \textbf{Monte Carlo methods}
+    \end{center}
 \end{frame}
 
 \begin{frame}
@@ -725,7 +734,9 @@ Markov Chain Monte Carlo (MCMC)
 \begin{frame}{MCMC integration}
     \begin{figure}
         \centering
+        \href{https://doi.org/10.3390/app10010272}{
         \includegraphics[width=0.6\linewidth]{../plots/mcmc_diagram.png}
+        }
     \end{figure}
     % https://doi.org/10.3390/app10010272
 \end{frame}
@@ -820,7 +831,9 @@ We loop
         \begin{minipage}{0.25\textwidth}
             \begin{figure}
                 \centering
+                \href{https://www.researchgate.net/publication/341958289/figure/fig1/AS:902030868615168@1592072326255/JASP-classification-scheme-for-the-Bayes-factor-BF-10.png}{
                 \includegraphics[width=\textwidth]{../plots/jeffreys-scale.png}
+                }
                 %https://www.researchgate.net/publication/341958289/figure/fig1/AS:902030868615168@1592072326255/JASP-classification-scheme-for-the-Bayes-factor-BF-10.png
             \end{figure}
         \end{minipage}
@@ -835,6 +848,7 @@ We loop
     B = \exp(\ln Z(WET) - \ln Z (SM)) = 54.6
     $$
     \begin{flushright}
+        \small
         \href{https://arxiv.org/pdf/2302.05268}{arXiv:2302.05268v2 [hep-ph]}
     \end{flushright}
 \end{frame}
