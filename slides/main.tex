@@ -136,7 +136,7 @@ What is a probability?
     \arrow Need probability interpretations.
 
     \vspace{0.5cm}
-    The interpretations \textbf{share the same mathematical framework}, but the meaning of $p(x)$ is different.
+    Interpretations \textbf{share the same mathematical framework}, but the meaning of $p(x)$ is different.
 \end{frame}
 
 \begin{frame}{Frequentist interpretation}
@@ -223,7 +223,7 @@ $$
     = \frac{p(x_2|\theta)}{p(x_2)} \color{red} \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
     $$
     % Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
-
+    \onslide<2->
     \begin{figure}
         \centering
         \includegraphics[width=0.6\textwidth]{../plots/updating.pdf}
@@ -301,7 +301,7 @@ $$
 \begin{frame}
 \center
 \Large
-Parameter inference
+How do we make data useful?
 \end{frame}
 
 \begin{frame}{Parameter inference}
@@ -373,7 +373,7 @@ Parameter inference
     \onslide<2->
     Asymptotically,
     $$
-    \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right),
+    \lim_{N \to \infty} p\left(\sqrt{N}(\hat \theta - \theta_{true})\right) = \mathcal{N}\left(0, I^{-1}(\theta)\right)
     $$
     \arrow consistency, asymptotic unbiasedness and efficiency
     % $$ \lim_{N \to \infty} V(\hat \theta) = I(\theta)^{-1} = E\left[\frac{\partial \ln p(x|\theta)}{\partial \theta}\right]^{-1}$$
@@ -417,10 +417,17 @@ Parameter inference
 
 \begin{frame}{Mode vs. ML estimator}
         Stationary point of the posterior at $\theta^*$:
-        $$0=\frac{\partial p(\theta|x)}{\partial \theta}\bigg\vert_{\theta = \theta^*} \propto 
+        $$
+        0=\frac{\partial p(\theta|x)}{\partial \theta}\bigg\vert_{\theta = \theta^*} \propto 
         \left(
-            \frac{\partial p(x|\theta)}{\partial \theta}p(\theta) + p(x|\theta) \frac{\partial p(\theta)}{\partial \theta}\right)\bigg\vert_{\theta = \theta^*}$$
-        $$\implies \theta^* = \hat \theta \quad \text{if} \quad \frac{\partial p(\theta)}{\partial \theta}\bigg\vert_{\theta = \theta^*}=0$$
+            \frac{\partial p(x|\theta)}{\partial \theta}p(\theta) + p(x|\theta) \frac{\partial p(\theta)}{\partial \theta}\right)\bigg\vert_{\theta = \theta^*}
+        $$
+        \onslide<2->
+        $$
+        \tcbhighmath[colframe=yellow]{
+        \implies \theta^* = \hat \theta \quad \text{if} \quad \frac{\partial p(\theta)}{\partial \theta}\bigg\vert_{\theta = \theta^*}=0
+        }
+        $$
         Posterior mode and ML estimate agree for \textit{flat} priors.
 \end{frame}
 
@@ -602,7 +609,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
         $$p(\nu|a) \propto p(a|\nu) p_0(\nu)$$
         %If $p_0(\nu)$ is chosen to have minimal impact, this overlaps with the frequentist treatment.
         
-        Only in Bayesian:\\ other prior choices allowed
+        Only Bayesian allows other prior choices
         $$ p(\nu) = \mathcal{N}(\nu | \nu_0, \sigma_\nu^2)$$
         
         % Bayesian approach also requires priors for POIs.
@@ -731,7 +738,7 @@ Credible intervals (CI) $[\theta_1, \theta_2]$ cover $1-\alpha$ of the posterior
     $$
     Commonly a high dimensional integral 
     \begin{center}
-        \arrow \textbf{Monte Carlo methods}
+        \arrow \textbf{Monte Carlo integration}
     \end{center}
 \end{frame}
 
@@ -818,7 +825,7 @@ We loop
 \begin{frame}
     \center
     \Large
-    Model comparison
+    How do we compare model performance?
 \end{frame}
 
 \begin{frame}{Frequentist: P-values}
