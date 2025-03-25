@@ -28,13 +28,13 @@ def plot_2d_pdf_contour(
     plt.plot(X[ind_Zmin], Y[ind_Zmin], 'x', label=mode_label)
     if x_sigma:
         plt.vlines([x_sigma[0]-x_sigma[1], x_sigma[0]+x_sigma[1]], *y_range, alpha=0.5, label=r'$\pm 1\sigma$')
-        plt.xticks([x_sigma[0]+ i * x_sigma[1] for i in range(-3,4,1)])
+        plt.xticks([x_sigma[0]+ i * x_sigma[1] for i in range(-3,4,1)], rotation=45)
     if y_sigma:
         plt.hlines([y_sigma[0]-y_sigma[1], y_sigma[0]+y_sigma[1]], *x_range, alpha=0.5)
-        plt.yticks([y_sigma[0]+ i * y_sigma[1] for i in range(-3,4,1)])
+        plt.yticks([y_sigma[0]+ i * y_sigma[1] for i in range(-3,4,1)], rotation=45)
 
-    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
-    plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f'))
+    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+    plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
