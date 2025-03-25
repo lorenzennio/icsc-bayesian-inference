@@ -218,12 +218,22 @@ $$
     \vspace{-0.5cm}
     Can generally use measurements to \textit{update} our posterior
     $$
-    p(\theta | x_1, x_2) 
-    = \frac{p(x_2|\theta)}{p(x_2)} \color{red} p(\theta | x_1) \color{black}
-    = \frac{p(x_2|\theta)}{p(x_2)} \color{red} \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
+    \visible<2->{
+        p(\theta | x_1, x_2) 
+        = \frac{p(x_2|\theta)}{p(x_2)}
+    }
+    \color{red} 
+    p(\theta | x_1) 
+    \color{black}
+    = 
+    \visible<2->{
+        \frac{p(x_2|\theta)}{p(x_2)} 
+    }
+    \color{red} 
+    \frac{p(x_1|\theta)}{p(x_1)} p(\theta).
     $$
     % Effectively what is done for combining measurement results (eg. \href{https://pdg.lbl.gov/}{PDG averages}).
-    \onslide<2->
+    \onslide<3->
     \begin{figure}
         \centering
         \includegraphics[width=0.6\textwidth]{../plots/updating.pdf}
