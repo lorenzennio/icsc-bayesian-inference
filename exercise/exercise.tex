@@ -31,7 +31,7 @@ where $m_s=125~\mathrm{GeV}$ and $\sigma_s=2~\mathrm{GeV}$. You expect $100000$ 
 
 \textit{Hint: Always work with (twice) negative logarithmic probabilities throughout the exercise.}
 \begin{enumerate}
-    \item Load MC events for the \href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/mc_signal.txt}{signal}, for the \href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/mc_background.txt}{background} and for the \href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/LHC_data.txt}{data}. Bin them in a suitable histogram.
+    \item Load MC events for the signal (\href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/mc_signal.txt}{mc\_signal.txt}), for the background (\href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/mc_background.txt}{mc\_background.txt}) and for the data (\href{https://github.com/lorenzennio/icsc-bayesian-inference/blob/main/LHC_data.txt}{LHC\_data.txt}). Bin them in a suitable histogram.
 
     \item Construct a binned negative log-likelihood function
     $$p(n|\mu, \mu_{bkg}) = \prod_{\mathrm{bins}~b} \mathrm{Poisson}(n_b|\nu_b(\mu, \mu_{bkg}))$$
