@@ -33,8 +33,8 @@ def plot_2d_pdf_contour(
         plt.hlines([y_sigma[0]-y_sigma[1], y_sigma[0]+y_sigma[1]], *x_range, alpha=0.5)
         plt.yticks([y_sigma[0]+ i * y_sigma[1] for i in range(-3,4,1)], rotation=45)
 
-    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
-    plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
+    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f'))
+    plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f'))
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
